@@ -1,0 +1,1873 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Carbon footPrint Calculator</title>
+
+<link href="style/css.css" rel="stylesheet" type="text/css" />
+<script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+<link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" src="js/carbonCalHDF.js" defer></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      //   google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart(val1, val2, val3) {
+        var data = google.visualization.arrayToDataTable([
+          ['', 'National Average', 'Your Emission'],
+          ['Home', 24608, val1],
+          ['Driving', 11063, val2],
+          ['Flying', 1016, val3]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'How you compare to the national average.',
+            subtitle: 'Emissions (lbs C02/Yr)',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+
+
+<script type="text/javascript">
+function Attr()
+{
+document.getElementById('result').style.display="block";
+var xyz = parseInt(document.getElementById('span_global_result').value); if (xyz <= 800)
+{
+var a=0;
+var b=200;
+var j=parseInt(-1);
+for (var i=0; i<=3; i++)
+{ j++;
+if ( xyz > a && xyz <= b)
+document.getElementById('attr').options[j].selected=true; a = a+200;
+b = b+200;
+}
+}
+else {
+var a=0;
+var b=1000;
+var j=parseInt(3);
+for( var i=0; i<=504; i++)
+{
+j++;
+if (xyz > 1000000)
+{ document.getElementById('attr').options[1003].selected=true; /* change according dropdown attribute limit */
+}
+else {
+if (xyz > a && xyz <= b)
+{
+document.getElementById('attr').options[j].selected=true;
+}
+}
+a = a+1000;
+b = b+1000;
+}
+}
+}
+</script>
+
+
+<script>
+function showTabs(tabId, divId)
+{
+document.getElementById('divHome').style.display="none";
+document.getElementById('divDriving').style.display="none";
+document.getElementById('divFlying').style.display="none";
+document.getElementById('divFootprint').style.display="none";
+document.getElementById(divId).style.display="block";
+document.getElementById('tabHome').className="TabbedPanelsTab";
+document.getElementById('tabDriving').className="TabbedPanelsTab";
+document.getElementById('tabFlying').className="TabbedPanelsTab";
+document.getElementById('tabFootprint').className="TabbedPanelsTab";
+document.getElementById(tabId).className="TabbedPanelsTab TabbedPanelsTabSelected";
+}
+</script>
+
+</head>
+
+<body>
+
+<div id="TabbedPanels1" class="TabbedPanels">
+<ul class="TabbedPanelsTabGroup">
+<li class="TabbedPanelsTab"  tabindex="0" id="tabHome" >Home</li>
+<li class="TabbedPanelsTab" tabindex="0" id="tabDriving" >Driving</li>
+<li class="TabbedPanelsTab" tabindex="0" id="tabFlying" >Flying</li>
+<li class="TabbedPanelsTab" tabindex="0" id="tabFootprint" ><a onClick="seeResult()" style="color:#009900">Your Footprint & Offsets</a></li>
+</ul>
+
+<div class="TabbedPanelsContentGroup">
+<div class="TabbedPanelsContent" id="divHome">
+<h2>Home Energy</h2>
+<p>Heating your home in the winter and keeping it cool in the summer is a significant contributor to both your expenses and carbon emissions. The production of electricity in the U.S. causes about 2.6 billion tons of carbon dioxide (CO<sub>2</sub>) emissions annually and is the major cause of air pollution. Each individual emits around 50,000 pounds of carbon dioxide a year! You can help reduce pollution and fight global warming by calculating your footprint and working towards making it carbon neutral by reducing and offseting your emissions.</p>
+<table cellpadding="0" cellspacing="0" width="700px">
+<tr>
+<td><p><b>Calculate your home energy carbon footprint and offset.</b><br>
+<br>
+<b>Where is your home?</b><br>
+<br>
+Select your State:
+
+<SELECT NAME = "States" id="States_id" onChange="if(this.value!=''){document.getElementById('tableEnergy').style.display='block';document.getElementById('tableEnergy').style.visibility='visible'}else{document.getElementById('tableEnergy').style.display='none';document.getElementById('tableEnergy').style.visibility='hidden'}">
+<OPTION VALUE = "" selected="selected">Select Here</OPTION>
+<OPTION VALUE = "113,218">Alaska</OPTION>
+<OPTION VALUE = "214,79">Alabama</OPTION>
+<OPTION VALUE = "180,105">Arkansas</OPTION>
+<OPTION VALUE = "182,91">Arizona</OPTION>
+<OPTION VALUE = "67,126">California</OPTION>
+<OPTION VALUE = "249,143">Colorado</OPTION>
+<OPTION VALUE = "180,84">Connecticut</OPTION>
+
+<OPTION VALUE = "133,88">District of Columbia</OPTION>
+<OPTION VALUE = "133,88">Delaware</OPTION>
+<OPTION VALUE = "147,69">Florida</OPTION>
+<OPTION VALUE = "210,82">Georgia</OPTION>
+<OPTION VALUE = "180,42">Hawaii</OPTION>
+<OPTION VALUE = "154,120">Iowa</OPTION>
+<OPTION VALUE = "165,122">Idaho</OPTION>
+<OPTION VALUE = "176,133">Illinois</OPTION>
+<OPTION VALUE = "287,114">Indiana</OPTION>
+
+<OPTION VALUE = "292,113">Kansas</OPTION>
+<OPTION VALUE = "336,105">Kentucky</OPTION>
+<OPTION VALUE = "175,102">Louisiana</OPTION>
+<OPTION VALUE = "180,84">Massachusetts</OPTION>
+<OPTION VALUE = "243,91">Maryland</OPTION>
+<OPTION VALUE = "120,83">Maine</OPTION>
+<OPTION VALUE = "201,125">Michigan</OPTION>
+<OPTION VALUE = "254,128">Minnesota</OPTION>
+<OPTION VALUE = "200,105">Missouri</OPTION>
+
+<OPTION VALUE = "165,102">Mississippi</OPTION>
+<OPTION VALUE = "123,132">Montana</OPTION>
+<OPTION VALUE = "153,88">North Carolina</OPTION>
+<OPTION VALUE = "309,138">North Dakota</OPTION>
+<OPTION VALUE = "298,132">Nebraska</OPTION>
+<OPTION VALUE = "150,91">New Hampshire</OPTION>
+<OPTION VALUE = "150,97">New Jersey</OPTION>
+<OPTION VALUE = "257,118">New Mexico</OPTION>
+<OPTION VALUE = "154,104">Nevada</OPTION>
+
+<OPTION VALUE = "77,97">New York</OPTION>
+<OPTION VALUE = "253,104">Ohio</OPTION>
+<OPTION VALUE = "272,111">Oklahoma</OPTION>
+<OPTION VALUE = "108,103">Oregon</OPTION>
+<OPTION VALUE = "228,91">Pennsylvania</OPTION>
+<OPTION VALUE = "150,85">Rhode Island</OPTION>
+<OPTION VALUE = "155,86">South Carolina</OPTION>
+<OPTION VALUE = "287,134">South Dakota</OPTION>
+<OPTION VALUE = "213,101">Tennessee</OPTION>
+
+<OPTION VALUE = "131,114">Texas</OPTION>
+<OPTION VALUE = "135,135">Utah</OPTION>
+<OPTION VALUE = "278,92">Virginia</OPTION>
+<OPTION VALUE = "150,105">Vermont</OPTION>
+<OPTION VALUE = "133,88">Washington</OPTION>
+<OPTION VALUE = "201,123">Wisconsin</OPTION>
+<OPTION VALUE = "372,95">West Virginia</OPTION>
+<OPTION VALUE = "132,129">Wyoming</OPTION>
+</SELECT>
+
+</p></td>
+</tr>
+<tr>
+<td><table width="700px">
+<tr>
+<td valign="top" width="300px"><table width="300px" id="tableEnergy" style="display:none;" align="left">
+<tr>
+<td colspan="2"><b>How much do you spend <br />
+in an average month?</b></td>
+</tr>
+<tr>
+<td width="120px"></td>
+<td style="font-size:11px" width="250px">Choose at least one.</td>
+</tr>
+
+<tr>
+<td width="120px">Electricity: </td>
+<td>$
+<input type="text" id="elec_text_id" maxlength="5"></td>
+</tr>
+<tr>
+<td>Gas: </td>
+<td>$
+<input type="text" id="gas_text_id" maxlength="5"></td>
+</tr>
+<tr>
+<td>Heating Oil: </td>
+<td>$
+<input type="text" id="oil_text_id" maxlength="5"></td>
+
+</tr>
+<tr>
+<td>Propane: </td>
+<td>$
+<input type="text" id="propane_text_id" maxlength="5"></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="button" value="Calculate" onClick="cal_home(); seeResult();" id="home_calculate"></td>
+</tr>
+</table></td>
+<td valign="top"><div style="display:none" id="spanResultTop">
+<table width="350px" border="0" style="padding:0px; margin:0px" cellpadding="0" cellspacing="0">
+<tr>
+<td style=" background:url(images/top_left.gif) repeat-x bottom; height:15px;"></td>
+<td style=" background:url(images/top_mid.gif) repeat-x bottom; height:15px;" width="100%"></td>
+
+<td style=" background:url(images/top_right.gif) repeat-x bottom; height:15px;"></td>
+</tr>
+<tr>
+<td background="images/left_mid.gif" valign="top"></td>
+<td width="100%" bgcolor="#FFFFFF" valign="top"><div style="color:#000000; padding-bottom:6px;"><b>Your Home Footprint</b></div>
+<div style="color:#009900;" id="spanresult_home"></div>
+<div style="padding-top:6px">National Average: 24,608 lbs CO<sub>2</sub>/Yr</div></td>
+<td background="images/right_mid.gif" valign="top"></td>
+</tr>
+<tr>
+<td valign="top"><img src="images/bot_left.gif" /></td>
+<td valign="top" background="images/bot_mid.jpg" width="100%"></td>
+<td valign="top"><img src="images/bot_right.gif" /></td>
+
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+<div>To calculate the carbon footprint of additional homes, simply repeat this procedure.</div></td>
+</tr>
+</table>
+<div align="right" style="padding-right:80px; padding-top:30px; padding-bottom:30px">
+<input name="button" type="button" onClick="showTabs('tabDriving', 'divDriving')" value="Next: Driving &raquo;">
+</div>
+</div>
+<div class="TabbedPanelsContent" id="divDriving">
+<h2>Driving</h2>
+<p>Cars are a major source of carbon dioxide emissions causing global warming. The average car emits twice its weight in carbon dioxide. About 14% of the world's human activity related emissions come from transportation. You can help reduce pollution and fight global warming by calculating your footprint and working towards making your vehicles carbon neutral by reducing and offsetting your emissions.</p>
+
+<div style="padding:10"><b>Calculate your driving carbon footprint and offset.</b></div>
+<div id="select_modal" style="display:block; width:700px">
+<table cellpadding="10" cellspacing="0" width="700px">
+<tr>
+<td width="150px"><b>Year:</b> </td>
+<td><select id="drivingYear" onChange="enableDrivingCal()">
+<option selected="selected" value="">Select a year...</option>
+<option value="1">2008</option>
+<option value="1">2007</option>
+<option value="0.98">2006</option>
+
+<option value="0.97">2005</option>
+<option value="0.96">2004</option>
+<option value="0.95">2003</option>
+<option value="0.94">2002</option>
+<option value="0.93">2001</option>
+<option value="0.92">2000</option>
+<option value="0.91">1999</option>
+<option value="0.90">1998</option>
+<option value="0.90">1997</option>
+
+<option value="0.90">1996</option>
+<option value="0.90">1995</option>
+<option value="0.90">1994</option>
+</select>
+</td>
+<td rowspan="5" valign="top" width="350px"><div style="display:none" id="spanResultTopMod">
+<table width="350px" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style=" background:url(images/top_left.gif) repeat-x bottom; height:15px;"></td>
+<td style=" background:url(images/top_mid.gif) repeat-x bottom; height:15px;" width="100%"></td>
+<td style=" background:url(images/top_right.gif) repeat-x bottom; height:15px;"></td>
+</tr>
+<tr>
+<td background="images/left_mid.gif" valign="top"></td>
+
+<td width="100%" bgcolor="#FFFFFF"><div style="color:#000000; padding-bottom:3px;"><b>Your Driving Footprint</b></div>
+<div id="span_modal_result" style="color:#009900;"></div>
+<div style="padding-top:6px;">National Average: 11,063 lbs CO<sub>2</sub>/Yr</div></td>
+<td background="images/right_mid.gif"></td>
+</tr>
+<tr>
+<td><img src="images/bot_left.gif" /></td>
+<td background="images/bot_mid.jpg" width="100%"></td>
+<td><img src="images/bot_right.gif" /></td>
+</tr>
+</table>
+</div></td>
+</tr>
+
+<tr>
+<td><b>Make:</b> </td>
+<td><select id="DriveMake" onChange="changeModel();enableDrivingCal();" disabled="disabled">
+<option selected="selected">Select make...</option>
+<option value="Acura">Acura</option>
+<option value="Aston Martin">Aston Martin</option>
+<option value="Audi">Audi</option>
+<option value="BMW">BMW</option>
+<option value="Bentley">Bentley</option>
+
+<option value="Bugatti">Bugatti</option>
+<option value="Buick">Buick</option>
+<option value="Cadillac">Cadillac</option>
+<option value="Chevrolet">Chevrolet</option>
+<option value="Chrysler">Chrysler</option>
+<option value="Dodge">Dodge</option>
+<option value="Ferrari">Ferrari</option>
+<option value="Ford">Ford</option>
+<option value="GMC">GMC</option>
+
+<option value="Honda">Honda</option>
+<option value="Hummer">Hummer</option>
+<option value="Hyundai">Hyundai</option>
+<option value="Infiniti">Infiniti</option>
+<option value="Isuzu">Isuzu</option>
+<option value="Jaguar">Jaguar</option>
+<option value="Lamborghini">Lamborghini</option>
+<option value="LandRover">LandRover</option>
+<option value="Lexus">Lexus</option>
+
+<option value="Lotus">Lotus</option>
+<option value="Mazda">Mazda</option>
+<option value="Mercedes-Benz">Mercedes-Benz</option>
+<option value="Mitsubishi">Mitsubishi</option>
+<option value="Nissan">Nissan</option>
+<option value="Porsche">Porsche</option>
+<option value="Rolls-Royce">Rolls-Royce</option>
+<option value="Suzuki">Suzuki</option>
+<option value="Toyota">Toyota</option>
+
+<option value="Volkswagen">Volkswagen</option>
+<option value="Volvo">Volvo</option>
+</select>
+</td>
+</tr>
+<tr>
+<td><b>Model:</b> </td>
+<td><select id="DriveModel" onChange="enableDrivingCal()" disabled="disabled">
+<option selected="selected" value="">Select model...</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td><b>Miles per year:</b> </td>
+<td><select id="drivingMilesYear" disabled="disabled">
+<option value="1">2,000</option>
+<option value="2">4,000</option>
+<option value="3">6,000</option>
+<option value="4">8,000</option>
+<option value="5" selected="selected">10,000</option>
+<option value="6">12,000</option>
+
+<option value="7">14,000</option>
+<option value="8">16,000</option>
+<option value="9">18,000</option>
+<option value="10">20,000</option>
+<option value="11">22,000</option>
+<option value="12">24,000</option>
+<option value="13">26,000</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td width="150px"></td>
+<td><input type="button" value="Calculate" id="calculate_driving_modal" onClick="calDrivingModal(); seeResult();" disabled="disabled"></td>
+</tr>
+</table>
+<div style="padding:10"><a id="linkShowMPG" onClick="showHideDriving()" style="cursor:pointer">Click here</a> to enter your actual miles per gallons or if you can't find your car above</div>
+</div>
+<div id="enter_mpg" style="display:none; width:700px">
+<div>
+<p><b>Enter mpg or <a id="linkShowModel" onClick="showHideDriving()" style="cursor:pointer">Click here to select make and model...</a></b></p>
+</div>
+<table>
+
+<tr>
+<td valign="top"><table align="left">
+<tr>
+<td width="300px"><div>
+<p><b>Average miles per gallon:</b>
+<input type="text" id="driving_average_miles" size="2" maxlength="2">
+</p>
+</div>
+<div>
+<p><b>Miles per year:</b>
+<select id="driving_miles_year">
+<option value="2000">2,000</option>
+<option value="4000">4,000</option>
+
+<option value="6000">6,000</option>
+<option value="8000">8,000</option>
+<option value="10000" selected="selected">10,000</option>
+<option value="12000">12,000</option>
+<option value="14000">14,000</option>
+<option value="16000">16,000</option>
+<option value="18000">18,000</option>
+<option value="20000">20,000</option>
+<option value="22000">22,000</option>
+
+<option value="24000">24,000</option>
+<option value="26000">26,000</option>
+</select>
+</p>
+</div>
+<div>
+<p><b>Fuel: </b>
+<input type="radio" name="fuel" value="19.564" id="driving_mpg_gas" checked="checked">
+Gasoline
+<input type="radio" name="fuel" value="22.864" id="driving_mpg_diesel">
+Diesel
+<input type="radio" name="fuel" value="16.16" id="driving_mpg_e85">
+E85
+<input type="radio" name="fuel" value="16" id="driving_mpg_cng">
+
+CNG </p>
+</div></td>
+</tr>
+<tr>
+<td><input type="button" id="calculate_driving_mpg" onClick="calDrivingMPG(); seeResult();" value="Calculate">
+</td>
+</tr>
+</table></td>
+<td valign="top"><div style="display:none" id="spanResultTopMgg">
+<table width="350px" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td><img src="images/top_left.gif" /></td>
+<td background="images/top_mid.gif" width="100%"></td>
+<td><img src="images/top_right.gif"/></td>
+</tr>
+<tr>
+
+<td background="images/left_mid.gif"></td>
+<td width="100%" bgcolor="#FFFFFF"><div style="color:#000000; padding-bottom:6px;"><b>Your Driving Footprint</b></div>
+<div style="color:#009900" id="span_mgg_result"></div>
+<div style="padding-top:6px">National Average: 11,063 lbs CO<sub>2</sub>/Yr</div></td>
+<td background="images/right_mid.gif"></td>
+</tr>
+<tr>
+<td><img src="images/bot_left.gif" /></td>
+<td background="images/bot_mid.jpg" width="100%"></td>
+<td><img src="images/bot_right.gif" /></td>
+</tr>
+</table>
+</div></td>
+
+</tr>
+</table>
+</div>
+<div style="padding-top:10px; padding-bottom:10px;">To calculate the carbon footprint of additional vehicles, simply repeat this procedure</div>
+<div align="right" style="width:80%; padding:20px">
+<input name="button" type="button" onClick="showTabs('tabHome', 'divHome')" value="&laquo; Back: Home" style="margin-right:280px">
+<input name="button" type="button" onClick="showTabs('tabFlying', 'divFlying')" value="Next: Flying &raquo;">
+</div>
+</div>
+<div class="TabbedPanelsContent" id="divFlying">
+<h2>Air Travel</h2>
+<p>Unfortunately, planes consume a vast amount of fuel. Flying cross-country burns more than 100 gallons of fuel per passenger. Over 200 million metric tons of carbon dioxide are emitted per year from jet fuel use. That accounts for over 12% of the total U.S. carbon dioxide emissions created by the transportation sector annually. Airline travel contributes a significantly to global warming, and it's growing faster than any other single source of carbon emissions. You can help reduce pollution and fight global warming by calculating your footprint and working towards making your air travel carbon neutral by reducing and offsetting your emissions. </p>
+<p><b>Calculate your air travel carbon footprint and offset.</b></p>
+
+<table cellpadding="10" cellspacing="0" border="0" width="700px">
+<tr>
+<td><p><b>Short Flights</b>
+<div style="font-size:11px">Less than two hours each way.<br>
+For example, Atlanta, GA to Tampa, FL</div>
+</p>
+</td>
+<td valign="top"><select id="short_flight">
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+
+<option value="25">25</option>
+<option value="30">30</option>
+<option value="35">35</option>
+<option value="40">40</option>
+<option value="50">50</option>
+<option value="60">60</option>
+<option value="70">70</option>
+<option value="80">80</option>
+<option value="90">90</option>
+
+<option value="100">100</option>
+</select>
+</td>
+<td rowspan="3" valign="top" width="320px"><div style="display:none" id="table_cal_flying">
+<table width="300px" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style=" background:url(images/top_left.gif) repeat-x bottom; height:15px;"></td>
+<td style=" background:url(images/top_mid.gif) repeat-x bottom; height:15px;" width="100%"></td>
+<td style=" background:url(images/top_right.gif) repeat-x bottom; height:15px;"></td>
+</tr>
+<tr>
+<td background="images/left_mid.gif"></td>
+<td width="100%" bgcolor="#FFFFFF"><div id="span_cal_flying" ></div></td>
+<td background="images/right_mid.gif"></td>
+</tr>
+<tr>
+
+<td><img src="images/bot_left.gif" /></td>
+<td background="images/bot_mid.jpg" width="100%"></td>
+<td><img src="images/bot_right.gif" /></td>
+</tr>
+</table>
+</div></td>
+</tr>
+<tr>
+<td><p><b>Medium Flights</b>
+<div style="font-size:11px">About four hours each way.<br>
+For example, Atlanta, GA to Phoenix, AZ</div>
+</p>
+</td>
+<td valign="top"><select id="medium_flight">
+
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="25">25</option>
+<option value="30">30</option>
+<option value="35">35</option>
+<option value="40">40</option>
+<option value="50">50</option>
+<option value="60">60</option>
+
+<option value="70">70</option>
+<option value="80">80</option>
+<option value="90">90</option>
+<option value="100">100</option>
+</select></td>
+</tr>
+<tr>
+<td><p><b>Long Flights</b>
+<div style="font-size:11px">Anything over four hours each way.<br>
+For example, Atlanta, GA to Seattle, WA</div>
+
+</p>
+</td>
+<td valign="top"><select id="long_flight">
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="25">25</option>
+<option value="30">30</option>
+<option value="35">35</option>
+<option value="40">40</option>
+
+<option value="50">50</option>
+<option value="60">60</option>
+<option value="70">70</option>
+<option value="80">80</option>
+<option value="90">90</option>
+<option value="100">100</option>
+</select></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="button" value="Calculate" onClick="cal_flying(); seeResult();"></td>
+
+<td></td>
+</tr>
+</table>
+<div align="right" style="width:90%; padding:20">
+<input name="button" type="button" onClick="showTabs('tabDriving', 'divDriving')" value="&laquo; Back: Driving" style="margin-right:250px">
+<input name="button" type="button" onClick="showTabs('tabFootprint', 'divFootprint'); seeResult();" value="Next: Your Total Footprint &raquo;">
+</div>
+</div>
+<div class="TabbedPanelsContent" id="divFootprint" style="width:700px">
+<div style="width:400px; float:left">
+<h2>Your Total Footprint</h2>
+</div>
+<div style="margin-right:20px; float:left"><img src="images/printer.jpg" onClick="window.print()" style="cursor:pointer;"></a></div>
+<table cellpadding=8 cellspacing="0" style="text-align:left">
+<tr>
+<td><b>Emission Source</b></td>
+
+<td><b>National Av. (CO<sub>2</sub>/Yr)</b></td>
+<td><b>Your Emissions (CO<sub>2</sub>/Yr)</b></td>
+<td></td>
+<td rowspan="5" valign="middle"><table cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+<tr>
+<td valign="middle"><img src="images/fussionImage.jpg" border="0"></td>
+<td>
+    <div id="columnchart_material" style="width: 450px; height: 250px;"></div>
+</td>
+</tr>
+</table></td>
+</tr>
+<tr>
+<td valign="top">Home</td>
+<td valign="top">24,608 lbs</td>
+<td valign="top"><input type="hidden" id="result_home_id" value="0">
+<input type="text" id="result_home_id_comma" disabled="disabled" style="border:none; background-color:#E2E2E2;" value="0" size="10">
+<br>
+<a onClick="showTabs('tabHome', 'divHome')" style="cursor:pointer">Edit</a> | <a onClick="deleteFinalhome()" style="cursor:pointer">Delete</a> </td>
+
+<td></td>
+</tr>
+<tr>
+<td valign="top">Driving</td>
+<td valign="top">11,063 lbs</td>
+<td valign="top"><input type="hidden" id="driving_result_mpg_id" value="0">
+<input type="text" id="driving_result_mpg_id_comma" disabled="disabled" style="border:none; background-color:#E2E2E2;" value="0" size="10">
+<br>
+<a onClick="showTabs('tabDriving', 'divDriving')" style="cursor:pointer">Edit</a> | <a onClick="deleteFinaldriving()" style="cursor:pointer">Delete</a> </td>
+<td></td>
+
+</tr>
+<tr>
+<td valign="top">Flying</td>
+<td valign="top">1,016 lbs</td>
+<td valign="top"><input type="hidden" id="flying_result_id" value="0">
+<input name="text" type="text" disabled="disabled" id="flying_result_id_comma" style="border:none; background-color:#E2E2E2;" value="0" size="10">
+<br>
+<a onClick="showTabs('tabFlying', 'divFlying')" style="cursor:pointer">Edit</a> | <a onClick="deleteFinalflying()" style="cursor:pointer">Delete</a> </td>
+<td></td>
+</tr>
+
+<tr style="color:#009900">
+<td valign="top"><b>Total Emissions</b></td>
+<td valign="top">36,687 lbs</td>
+<td valign="top"><span id="span_global_result_comma"></span>
+<input type="hidden" id="span_global_result" value="0">
+</td>
+<td></td>
+</tr>
+</table>
+<div id="result" style="display:none;">
+<table cellpadding="10">
+<tr>
+<td style="color:#009900;"><b>Cost to Offset</b></td>
+<td>
+<table border=0>
+<tr><td align="left" valign="top">&nbsp;
+</td>
+<td align="left" valign="top">
+<font face="Arial, Helvetica" size="-1">
+<select name="Product_Attributes[1]:value" id="attr">
+<option value="200-lbs-CO2">200 lbs CO2 - $1</option>
+<option value="400-lbs-CO2">400 lbs CO2 - $2</option>
+
+<option value="600-lbs-CO2">600 lbs CO2 - $3</option>
+<option value="800-lbs-CO2">800 lbs CO2 - $4</option>
+<option value="1000-lbs-CO2">1,000 lbs CO2 - $5 </option>
+<option value="2000-lbs-CO2">2,000 lbs CO2 - $10 </option>
+<option value="3000-lbs-Co2">3,000 lbs CO2 - $15 </option>
+<option value="4000-lbs-Co2">4,000 lbs CO2 - $20 </option>
+<option value="5000-lbs-Co2">5,000 lbs CO2 - $25 </option>
+<option value="6000-lbs-Co2">6,000 lbs CO2 - $30 </option>
+<option value="7000-lbs-Co2">7,000 lbs CO2 - $35 </option>
+
+<option value="8000-lbs-Co2">8,000 lbs CO2 - $40 </option>
+<option value="9000-lbs-Co2">9,000 lbs CO2 - $45 </option>
+<option value="10000-lbs-Co2">10,000 lbs CO2 - $50 </option>
+<option value="11000-lbs-Co2">11,000 lbs CO2 - $55 </option>
+<option value="12000-lbs-Co2">12,000 lbs CO2 - $60 </option>
+<option value="13000-lbs-Co2">13,000 lbs CO2 - $65 </option>
+<option value="14000-lbs-Co2">14,000 lbs CO2 - $70 </option>
+<option value="15000-lbs-Co2">15,000 lbs CO2 - $75 </option>
+<option value="16000-lbs-Co2">16,000 lbs CO2 - $80 </option>
+
+<option value="17000-lbs-Co2">17,000 lbs CO2 - $85 </option>
+<option value="18000-lbs-Co2">18,000 lbs CO2 - $90 </option>
+<option value="19000-lbs-Co2">19,000 lbs CO2 - $95 </option>
+<option value="20000-lbs-Co2">20,000 lbs CO2 - $100 </option>
+<option value="21000-lbs-Co2">21,000 lbs CO2 - $105 </option>
+<option value="22000-lbs-Co2">22,000 lbs CO2 - $110 </option>
+<option value="23000-lbs-Co2">23,000 lbs CO2 - $115 </option>
+<option value="24000-lbs-Co2">24,000 lbs CO2 - $120 </option>
+<option value="25000-lbs-Co2">25,000 lbs CO2 - $125 </option>
+
+<option value="26000-lbs-Co2">26,000 lbs CO2 - $130 </option>
+<option value="27000-lbs-Co2">27,000 lbs CO2 - $135 </option>
+<option value="28000-lbs-Co2">28,000 lbs CO2 - $140 </option>
+<option value="29000-lbs-Co2">29,000 lbs CO2 - $145 </option>
+<option value="30000-lbs-Co2">30,000 lbs CO2 - $150 </option>
+<option value="31000-lbs-Co2">31,000 lbs CO2 - $155 </option>
+<option value="32000-lbs-Co2">32,000 lbs CO2 - $160 </option>
+<option value="33000-lbs-Co2">33,000 lbs CO2 - $165 </option>
+<option value="34000-lbs-Co2">34,000 lbs CO2 - $170 </option>
+
+<option value="35000-lbs-Co2">35,000 lbs CO2 - $175 </option>
+<option value="36000-lbs-Co2">36,000 lbs CO2 - $180 </option>
+<option value="37000-lbs-Co2">37,000 lbs CO2 - $185 </option>
+<option value="38000-lbs-Co2">38,000 lbs CO2 - $190 </option>
+<option value="39000-lbs-Co2">39,000 lbs CO2 - $195 </option>
+<option value="40000-lbs-Co2">40,000 lbs CO2 - $200 </option>
+<option value="41000-lbs-Co2">41,000 lbs CO2 - $205 </option>
+<option value="42000-lbs-Co2">42,000 lbs CO2 - $210 </option>
+<option value="43000-lbs-Co2">43,000 lbs CO2 - $215 </option>
+
+<option value="44000-lbs-Co2">44,000 lbs CO2 - $220 </option>
+<option value="45000-lbs-Co2">45,000 lbs CO2 - $225 </option>
+<option value="46000-lbs-Co2">46,000 lbs CO2 - $230 </option>
+<option value="47000-lbs-Co2">47,000 lbs CO2 - $235 </option>
+<option value="48000-lbs-Co2">48,000 lbs CO2 - $240 </option>
+<option value="49000-lbs-Co2">49,000 lbs CO2 - $245 </option>
+<option value="50000-lbs-Co2">50,000 lbs CO2 - $250 </option>
+<option value="51000-lbs-Co2">51,000 lbs CO2 - $255 </option>
+<option value="52000-lbs-Co2">52,000 lbs CO2 - $260 </option>
+
+<option value="53000-lbs-Co2">53,000 lbs CO2 - $265 </option>
+<option value="54000-lbs-Co2">54,000 lbs CO2 - $270 </option>
+<option value="55000-lbs-Co2">55,000 lbs CO2 - $275 </option>
+<option value="56000-lbs-Co2">56,000 lbs CO2 - $280 </option>
+<option value="57000-lbs-Co2">57,000 lbs CO2 - $285 </option>
+<option value="58000-lbs-Co2">58,000 lbs CO2 - $290 </option>
+<option value="59000-lbs-Co2">59,000 lbs CO2 - $295 </option>
+<option value="60000-lbs-Co2">60,000 lbs CO2 - $300 </option>
+<option value="61000-lbs-Co2">61,000 lbs CO2 - $305 </option>
+
+<option value="62000-lbs-Co2">62,000 lbs CO2 - $310 </option>
+<option value="63000-lbs-Co2">63,000 lbs CO2 - $315 </option>
+<option value="64000-lbs-Co2">64,000 lbs CO2 - $320 </option>
+<option value="65000-lbs-Co2">65,000 lbs CO2 - $325 </option>
+<option value="66000-lbs-Co2">66,000 lbs CO2 - $330 </option>
+<option value="67000-lbs-Co2">67,000 lbs CO2 - $335 </option>
+<option value="68000-lbs-Co2">68,000 lbs CO2 - $340 </option>
+<option value="69000-lbs-Co2">69,000 lbs CO2 - $345 </option>
+<option value="70000-lbs-Co2">70,000 lbs CO2 - $350 </option>
+
+<option value="71000-lbs-Co2">71,000 lbs CO2 - $355 </option>
+<option value="72000-lbs-Co2">72,000 lbs CO2 - $360 </option>
+<option value="73000-lbs-Co2">73,000 lbs CO2 - $365 </option>
+<option value="74000-lbs-Co2">74,000 lbs CO2 - $370 </option>
+<option value="75000-lbs-Co2">75,000 lbs CO2 - $375 </option>
+<option value="76000-lbs-Co2">76,000 lbs CO2 - $380 </option>
+<option value="77000-lbs-Co2">77,000 lbs CO2 - $385 </option>
+<option value="78000-lbs-Co2">78,000 lbs CO2 - $390 </option>
+<option value="79000-lbs-Co2">79,000 lbs CO2 - $395 </option>
+
+<option value="80000-lbs-Co2">80,000 lbs CO2 - $400 </option>
+<option value="81000-lbs-Co2">81,000 lbs CO2 - $405 </option>
+<option value="82000-lbs-Co2">82,000 lbs CO2 - $410 </option>
+<option value="83000-lbs-Co2">83,000 lbs CO2 - $415 </option>
+<option value="84000-lbs-Co2">84,000 lbs CO2 - $420 </option>
+<option value="85000-lbs-Co2">85,000 lbs CO2 - $425 </option>
+<option value="86000-lbs-Co2">86,000 lbs CO2 - $430 </option>
+<option value="87000-lbs-Co2">87,000 lbs CO2 - $435 </option>
+<option value="88000-lbs-Co2">88,000 lbs CO2 - $440 </option>
+
+<option value="89000-lbs-Co2">89,000 lbs CO2 - $445 </option>
+<option value="90000-lbs-Co2">90,000 lbs CO2 - $450 </option>
+<option value="91000-lbs-Co2">91,000 lbs CO2 - $455 </option>
+<option value="92000-lbs-Co2">92,000 lbs CO2 - $460 </option>
+<option value="93000-lbs-Co2">93,000 lbs CO2 - $465 </option>
+<option value="94000-lbs-Co2">94,000 lbs CO2 - $470 </option>
+<option value="95000-lbs-Co2">95,000 lbs CO2 - $475 </option>
+<option value="96000-lbs-Co2">96,000 lbs CO2 - $480 </option>
+<option value="97000-lbs-Co2">97,000 lbs CO2 - $485 </option>
+
+<option value="98000-lbs-Co2">98,000 lbs CO2 - $490 </option>
+<option value="99000-lbs-Co2">99,000 lbs CO2 - $495 </option>
+<option value="100000-lbs-Co2">100,000 lbs CO2 - $500 </option>
+<option value="101000-lbs-Co2">101,000 lbs CO2 - $505 </option>
+<option value="102000-lbs-Co2">102,000 lbs CO2 - $510 </option>
+<option value="103000-lbs-Co2">103,000 lbs CO2 - $515 </option>
+<option value="104000-lbs-Co2">104,000 lbs CO2 - $520 </option>
+<option value="105000-lbs-Co2">105,000 lbs CO2 - $525 </option>
+<option value="106000-lbs-Co2">106,000 lbs CO2 - $530 </option>
+
+<option value="107000-lbs-Co2">107,000 lbs CO2 - $535 </option>
+<option value="108000-lbs-Co2">108,000 lbs CO2 - $540 </option>
+<option value="109000-lbs-Co2">109,000 lbs CO2 - $545 </option>
+<option value="110000-lbs-Co2">110,000 lbs CO2 - $550 </option>
+<option value="111000-lbs-Co2">111,000 lbs CO2 - $555 </option>
+<option value="112000-lbs-Co2">112,000 lbs CO2 - $560 </option>
+<option value="113000-lbs-Co2">113,000 lbs CO2 - $565 </option>
+<option value="114000-lbs-Co2">114,000 lbs CO2 - $570 </option>
+<option value="115000-lbs-Co2">115,000 lbs CO2 - $575 </option>
+
+<option value="116000-lbs-Co2">116,000 lbs CO2 - $580 </option>
+<option value="117000-lbs-Co2">117,000 lbs CO2 - $585 </option>
+<option value="118000-lbs-Co2">118,000 lbs CO2 - $590 </option>
+<option value="119000-lbs-Co2">119,000 lbs CO2 - $595 </option>
+<option value="120000-lbs-Co2">120,000 lbs CO2 - $600 </option>
+<option value="121000-lbs-Co2">121,000 lbs CO2 - $605 </option>
+<option value="122000-lbs-Co2">122,000 lbs CO2 - $610 </option>
+<option value="123000-lbs-Co2">123,000 lbs CO2 - $615 </option>
+<option value="124000-lbs-Co2">124,000 lbs CO2 - $620 </option>
+
+<option value="125000-lbs-Co2">125,000 lbs CO2 - $625 </option>
+<option value="126000-lbs-Co2">126,000 lbs CO2 - $630 </option>
+<option value="127000-lbs-Co2">127,000 lbs CO2 - $635 </option>
+<option value="128000-lbs-Co2">128,000 lbs CO2 - $640 </option>
+<option value="129000-lbs-Co2">129,000 lbs CO2 - $645 </option>
+<option value="130000-lbs-Co2">130,000 lbs CO2 - $650 </option>
+<option value="131000-lbs-Co2">131,000 lbs CO2 - $655 </option>
+<option value="132000-lbs-Co2">132,000 lbs CO2 - $660 </option>
+<option value="133000-lbs-Co2">133,000 lbs CO2 - $665 </option>
+
+<option value="134000-lbs-Co2">134,000 lbs CO2 - $670 </option>
+<option value="135000-lbs-Co2">135,000 lbs CO2 - $675 </option>
+<option value="136000-lbs-Co2">136,000 lbs CO2 - $680 </option>
+<option value="137000-lbs-Co2">137,000 lbs CO2 - $685 </option>
+<option value="138000-lbs-Co2">138,000 lbs CO2 - $690 </option>
+<option value="139000-lbs-Co2">139,000 lbs CO2 - $695 </option>
+<option value="140000-lbs-Co2">140,000 lbs CO2 - $700 </option>
+<option value="141000-lbs-Co2">141,000 lbs CO2 - $705 </option>
+<option value="142000-lbs-Co2">142,000 lbs CO2 - $710 </option>
+
+<option value="143000-lbs-Co2">143,000 lbs CO2 - $715 </option>
+<option value="144000-lbs-Co2">144,000 lbs CO2 - $720 </option>
+<option value="145000-lbs-Co2">145,000 lbs CO2 - $725 </option>
+<option value="146000-lbs-Co2">146,000 lbs CO2 - $730 </option>
+<option value="147000-lbs-Co2">147,000 lbs CO2 - $735 </option>
+<option value="148000-lbs-Co2">148,000 lbs CO2 - $740 </option>
+<option value="149000-lbs-Co2">149,000 lbs CO2 - $745 </option>
+<option value="150000-lbs-Co2">150,000 lbs CO2 - $750 </option>
+<option value="151000-lbs-Co2">151,000 lbs CO2 - $755 </option>
+
+<option value="152000-lbs-Co2">152,000 lbs CO2 - $760 </option>
+<option value="153000-lbs-Co2">153,000 lbs CO2 - $765 </option>
+<option value="154000-lbs-Co2">154,000 lbs CO2 - $770 </option>
+<option value="155000-lbs-Co2">155,000 lbs CO2 - $775 </option>
+<option value="156000-lbs-Co2">156,000 lbs CO2 - $780 </option>
+<option value="157000-lbs-Co2">157,000 lbs CO2 - $785 </option>
+<option value="158000-lbs-Co2">158,000 lbs CO2 - $790 </option>
+<option value="159000-lbs-Co2">159,000 lbs CO2 - $795 </option>
+<option value="160000-lbs-Co2">160,000 lbs CO2 - $800 </option>
+
+<option value="161000-lbs-Co2">161,000 lbs CO2 - $805 </option>
+<option value="162000-lbs-Co2">162,000 lbs CO2 - $810 </option>
+<option value="163000-lbs-Co2">163,000 lbs CO2 - $815 </option>
+<option value="164000-lbs-Co2">164,000 lbs CO2 - $820 </option>
+<option value="165000-lbs-Co2">165,000 lbs CO2 - $825 </option>
+<option value="166000-lbs-Co2">166,000 lbs CO2 - $830 </option>
+<option value="167000-lbs-Co2">167,000 lbs CO2 - $835 </option>
+<option value="168000-lbs-Co2">168,000 lbs CO2 - $840 </option>
+<option value="169000-lbs-Co2">169,000 lbs CO2 - $845 </option>
+
+<option value="170000-lbs-Co2">170,000 lbs CO2 - $850 </option>
+<option value="171000-lbs-Co2">171,000 lbs CO2 - $855 </option>
+<option value="172000-lbs-Co2">172,000 lbs CO2 - $860 </option>
+<option value="173000-lbs-Co2">173,000 lbs CO2 - $865 </option>
+<option value="174000-lbs-Co2">174,000 lbs CO2 - $870 </option>
+<option value="175000-lbs-Co2">175,000 lbs CO2 - $875 </option>
+<option value="176000-lbs-Co2">176,000 lbs CO2 - $880 </option>
+<option value="177000-lbs-Co2">177,000 lbs CO2 - $885 </option>
+<option value="178000-lbs-Co2">178,000 lbs CO2 - $890 </option>
+
+<option value="179000-lbs-Co2">179,000 lbs CO2 - $895 </option>
+<option value="180000-lbs-Co2">180,000 lbs CO2 - $900 </option>
+<option value="181000-lbs-Co2">181,000 lbs CO2 - $905 </option>
+<option value="182000-lbs-Co2">182,000 lbs CO2 - $910 </option>
+<option value="183000-lbs-Co2">183,000 lbs CO2 - $915 </option>
+<option value="184000-lbs-Co2">184,000 lbs CO2 - $920 </option>
+<option value="185000-lbs-Co2">185,000 lbs CO2 - $925 </option>
+<option value="186000-lbs-Co2">186,000 lbs CO2 - $930 </option>
+<option value="187000-lbs-Co2">187,000 lbs CO2 - $935 </option>
+
+<option value="188000-lbs-Co2">188,000 lbs CO2 - $940 </option>
+<option value="189000-lbs-Co2">189,000 lbs CO2 - $945 </option>
+<option value="190000-lbs-Co2">190,000 lbs CO2 - $950 </option>
+<option value="191000-lbs-Co2">191,000 lbs CO2 - $955 </option>
+<option value="192000-lbs-Co2">192,000 lbs CO2 - $960 </option>
+<option value="193000-lbs-Co2">193,000 lbs CO2 - $965 </option>
+<option value="194000-lbs-Co2">194,000 lbs CO2 - $970 </option>
+<option value="195000-lbs-Co2">195,000 lbs CO2 - $975 </option>
+<option value="196000-lbs-Co2">196,000 lbs CO2 - $980 </option>
+
+<option value="197000-lbs-Co2">197,000 lbs CO2 - $985 </option>
+<option value="198000-lbs-Co2">198,000 lbs CO2 - $990 </option>
+<option value="199000-lbs-Co2">199,000 lbs CO2 - $995 </option>
+<option value="200000-lbs-Co2">200,000 lbs CO2 - $1,000 </option>
+<option value="201000-lbs-Co2">201,000 lbs CO2 - $1,005 </option>
+<option value="202000-lbs-Co2">202,000 lbs CO2 - $1,010 </option>
+<option value="203000-lbs-Co2">203,000 lbs CO2 - $1,015 </option>
+<option value="204000-lbs-Co2">204,000 lbs CO2 - $1,020 </option>
+<option value="205000-lbs-Co2">205,000 lbs CO2 - $1,025 </option>
+
+<option value="206000-lbs-Co2">206,000 lbs CO2 - $1,030 </option>
+<option value="207000-lbs-Co2">207,000 lbs CO2 - $1,035 </option>
+<option value="208000-lbs-Co2">208,000 lbs CO2 - $1,040 </option>
+<option value="209000-lbs-Co2">209,000 lbs CO2 - $1,045 </option>
+<option value="210000-lbs-Co2">210,000 lbs CO2 - $1,050 </option>
+<option value="211000-lbs-Co2">211,000 lbs CO2 - $1,055 </option>
+<option value="212000-lbs-Co2">212,000 lbs CO2 - $1,060 </option>
+<option value="213000-lbs-Co2">213,000 lbs CO2 - $1,065 </option>
+<option value="214000-lbs-Co2">214,000 lbs CO2 - $1,070 </option>
+
+<option value="215000-lbs-Co2">215,000 lbs CO2 - $1,075 </option>
+<option value="216000-lbs-Co2">216,000 lbs CO2 - $1,080 </option>
+<option value="217000-lbs-Co2">217,000 lbs CO2 - $1,085 </option>
+<option value="218000-lbs-Co2">218,000 lbs CO2 - $1,090 </option>
+<option value="219000-lbs-Co2">219,000 lbs CO2 - $1,095 </option>
+<option value="220000-lbs-Co2">220,000 lbs CO2 - $1,100 </option>
+<option value="221000-lbs-Co2">221,000 lbs CO2 - $1,105 </option>
+<option value="222000-lbs-Co2">222,000 lbs CO2 - $1,110 </option>
+<option value="223000-lbs-Co2">223,000 lbs CO2 - $1,115 </option>
+
+<option value="224000-lbs-Co2">224,000 lbs CO2 - $1,120 </option>
+<option value="225000-lbs-Co2">225,000 lbs CO2 - $1,125 </option>
+<option value="226000-lbs-Co2">226,000 lbs CO2 - $1,130 </option>
+<option value="227000-lbs-Co2">227,000 lbs CO2 - $1,135 </option>
+<option value="228000-lbs-Co2">228,000 lbs CO2 - $1,140 </option>
+<option value="229000-lbs-Co2">229,000 lbs CO2 - $1,145 </option>
+<option value="230000-lbs-Co2">230,000 lbs CO2 - $1,150 </option>
+<option value="231000-lbs-Co2">231,000 lbs CO2 - $1,155 </option>
+<option value="232000-lbs-Co2">232,000 lbs CO2 - $1,160 </option>
+
+<option value="233000-lbs-Co2">233,000 lbs CO2 - $1,165 </option>
+<option value="234000-lbs-Co2">234,000 lbs CO2 - $1,170 </option>
+<option value="235000-lbs-Co2">235,000 lbs CO2 - $1,175 </option>
+<option value="236000-lbs-Co2">236,000 lbs CO2 - $1,180 </option>
+<option value="237000-lbs-Co2">237,000 lbs CO2 - $1,185 </option>
+<option value="238000-lbs-Co2">238,000 lbs CO2 - $1,190 </option>
+<option value="239000-lbs-Co2">239,000 lbs CO2 - $1,195 </option>
+<option value="240000-lbs-Co2">240,000 lbs CO2 - $1,200 </option>
+<option value="241000-lbs-Co2">241,000 lbs CO2 - $1,205 </option>
+
+<option value="242000-lbs-Co2">242,000 lbs CO2 - $1,210 </option>
+<option value="243000-lbs-Co2">243,000 lbs CO2 - $1,215 </option>
+<option value="244000-lbs-Co2">244,000 lbs CO2 - $1,220 </option>
+<option value="245000-lbs-Co2">245,000 lbs CO2 - $1,225 </option>
+<option value="246000-lbs-Co2">246,000 lbs CO2 - $1,230 </option>
+<option value="247000-lbs-Co2">247,000 lbs CO2 - $1,235 </option>
+<option value="248000-lbs-Co2">248,000 lbs CO2 - $1,240 </option>
+<option value="249000-lbs-Co2">249,000 lbs CO2 - $1,245 </option>
+<option value="250000-lbs-Co2">250,000 lbs CO2 - $1,250 </option>
+
+<option value="251000-lbs-Co2">251,000 lbs CO2 - $1,255 </option>
+<option value="252000-lbs-Co2">252,000 lbs CO2 - $1,260 </option>
+<option value="253000-lbs-Co2">253,000 lbs CO2 - $1,265 </option>
+<option value="254000-lbs-Co2">254,000 lbs CO2 - $1,270 </option>
+<option value="255000-lbs-Co2">255,000 lbs CO2 - $1,275 </option>
+<option value="256000-lbs-Co2">256,000 lbs CO2 - $1,280 </option>
+<option value="257000-lbs-Co2">257,000 lbs CO2 - $1,285 </option>
+<option value="258000-lbs-Co2">258,000 lbs CO2 - $1,290 </option>
+<option value="259000-lbs-Co2">259,000 lbs CO2 - $1,295 </option>
+
+<option value="260000-lbs-Co2">260,000 lbs CO2 - $1,300 </option>
+<option value="261000-lbs-Co2">261,000 lbs CO2 - $1,305 </option>
+<option value="262000-lbs-Co2">262,000 lbs CO2 - $1,310 </option>
+<option value="263000-lbs-Co2">263,000 lbs CO2 - $1,315 </option>
+<option value="264000-lbs-Co2">264,000 lbs CO2 - $1,320 </option>
+<option value="265000-lbs-Co2">265,000 lbs CO2 - $1,325 </option>
+<option value="266000-lbs-Co2">266,000 lbs CO2 - $1,330 </option>
+<option value="267000-lbs-Co2">267,000 lbs CO2 - $1,335 </option>
+<option value="268000-lbs-Co2">268,000 lbs CO2 - $1,340 </option>
+
+<option value="269000-lbs-Co2">269,000 lbs CO2 - $1,345 </option>
+<option value="270000-lbs-Co2">270,000 lbs CO2 - $1,350 </option>
+<option value="271000-lbs-Co2">271,000 lbs CO2 - $1,355 </option>
+<option value="272000-lbs-Co2">272,000 lbs CO2 - $1,360 </option>
+<option value="273000-lbs-Co2">273,000 lbs CO2 - $1,365 </option>
+<option value="274000-lbs-Co2">274,000 lbs CO2 - $1,370 </option>
+<option value="275000-lbs-Co2">275,000 lbs CO2 - $1,375 </option>
+<option value="276000-lbs-Co2">276,000 lbs CO2 -$1,380 </option>
+<option value="277000-lbs-Co2">277,000 lbs CO2 -$1,385 </option>
+
+<option value="278000-lbs-Co2">278,000 lbs CO2 -$1,390 </option>
+<option value="279000-lbs-Co2">279,000 lbs CO2 -$1,395 </option>
+<option value="280000-lbs-Co2">280,000 lbs CO2 -$1,400 </option>
+<option value="281000-lbs-Co2">281,000 lbs CO2 -$1,405 </option>
+<option value="282000-lbs-Co2">282,000 lbs CO2 -$1,410 </option>
+<option value="283000-lbs-Co2">283,000 lbs CO2 -$1,415 </option>
+<option value="284000-lbs-Co2">284,000 lbs CO2 -$1,420 </option>
+<option value="285000-lbs-Co2">285,000 lbs CO2 -$1,425 </option>
+<option value="286000-lbs-Co2">286,000 lbs CO2 -$1,430 </option>
+
+<option value="287000-lbs-Co2">287,000 lbs CO2 -$1,435 </option>
+<option value="288000-lbs-Co2">288,000 lbs CO2 -$1,440 </option>
+<option value="289000-lbs-Co2">289,000 lbs CO2 -$1,445 </option>
+<option value="290000-lbs-Co2">290,000 lbs CO2 -$1,450 </option>
+<option value="291000-lbs-Co2">291,000 lbs CO2 -$1,455 </option>
+<option value="292000-lbs-Co2">292,000 lbs CO2 -$1,460 </option>
+<option value="293000-lbs-Co2">293,000 lbs CO2 -$1,465 </option>
+<option value="294000-lbs-Co2">294,000 lbs CO2 -$1,470 </option>
+<option value="295000-lbs-Co2">295,000 lbs CO2 -$1,475 </option>
+
+<option value="296000-lbs-Co2">296,000 lbs CO2 -$1,480 </option>
+<option value="297000-lbs-Co2">297,000 lbs CO2 -$1,485 </option>
+<option value="298000-lbs-Co2">298,000 lbs CO2 -$1,490 </option>
+<option value="299000-lbs-Co2">299,000 lbs CO2 -$1,495 </option>
+<option value="300000-lbs-Co2">300,000 lbs CO2 -$1,500 </option>
+<option value="301000-lbs-Co2">301,000 lbs CO2 -$1,505 </option>
+<option value="302000-lbs-Co2">302,000 lbs CO2 -$1,510 </option>
+<option value="303000-lbs-Co2">303,000 lbs CO2 -$1,515 </option>
+<option value="304000-lbs-Co2">304,000 lbs CO2 -$1,520 </option>
+
+<option value="305000-lbs-Co2">305,000 lbs CO2 -$1,525 </option>
+<option value="306000-lbs-Co2">306,000 lbs CO2 -$1,530 </option>
+<option value="307000-lbs-Co2">307,000 lbs CO2 -$1,535 </option>
+<option value="308000-lbs-Co2">308,000 lbs CO2 -$1,540 </option>
+<option value="309000-lbs-Co2">309,000 lbs CO2 -$1,545 </option>
+<option value="310000-lbs-Co2">310,000 lbs CO2 -$1,550 </option>
+<option value="311000-lbs-Co2">311,000 lbs CO2 -$1,555 </option>
+<option value="312000-lbs-Co2">312,000 lbs CO2 -$1,560 </option>
+<option value="313000-lbs-Co2">313,000 lbs CO2 -$1,565 </option>
+
+<option value="314000-lbs-Co2">314,000 lbs CO2 -$1,570 </option>
+<option value="315000-lbs-Co2">315,000 lbs CO2 -$1,575 </option>
+<option value="316000-lbs-Co2">316,000 lbs CO2 -$1,580 </option>
+<option value="317000-lbs-Co2">317,000 lbs CO2 -$1,585 </option>
+<option value="318000-lbs-Co2">318,000 lbs CO2 -$1,590 </option>
+<option value="319000-lbs-Co2">319,000 lbs CO2 -$1,595 </option>
+<option value="320000-lbs-Co2">320,000 lbs CO2 -$1,600 </option>
+<option value="321000-lbs-Co2">321,000 lbs CO2 -$1,605 </option>
+<option value="322000-lbs-Co2">322,000 lbs CO2 -$1,610 </option>
+
+<option value="323000-lbs-Co2">323,000 lbs CO2 -$1,615 </option>
+<option value="324000-lbs-Co2">324,000 lbs CO2 -$1,620 </option>
+<option value="325000-lbs-Co2">325,000 lbs CO2 -$1,625 </option>
+<option value="326000-lbs-Co2">326,000 lbs CO2 -$1,630 </option>
+<option value="327000-lbs-Co2">327,000 lbs CO2 -$1,635 </option>
+<option value="328000-lbs-Co2">328,000 lbs CO2 -$1,640 </option>
+<option value="329000-lbs-Co2">329,000 lbs CO2 -$1,645 </option>
+<option value="330000-lbs-Co2">330,000 lbs CO2 -$1,650 </option>
+<option value="331000-lbs-Co2">331,000 lbs CO2 -$1,655 </option>
+
+<option value="332000-lbs-Co2">332,000 lbs CO2 -$1,660 </option>
+<option value="333000-lbs-Co2">333,000 lbs CO2 -$1,665 </option>
+<option value="334000-lbs-Co2">334,000 lbs CO2 -$1,670 </option>
+<option value="335000-lbs-Co2">335,000 lbs CO2 -$1,675 </option>
+<option value="336000-lbs-Co2">336,000 lbs CO2 -$1,680 </option>
+<option value="337000-lbs-Co2">337,000 lbs CO2 -$1,685 </option>
+<option value="338000-lbs-Co2">338,000 lbs CO2 -$1,690 </option>
+<option value="339000-lbs-Co2">339,000 lbs CO2 -$1,695 </option>
+<option value="340000-lbs-Co2">340,000 lbs CO2 -$1,700 </option>
+
+<option value="341000-lbs-Co2">341,000 lbs CO2 -$1,705 </option>
+<option value="342000-lbs-Co2">342,000 lbs CO2 -$1,710 </option>
+<option value="343000-lbs-Co2">343,000 lbs CO2 -$1,715 </option>
+<option value="344000-lbs-Co2">344,000 lbs CO2 -$1,720 </option>
+<option value="345000-lbs-Co2">345,000 lbs CO2 -$1,725 </option>
+<option value="346000-lbs-Co2">346,000 lbs CO2 -$1,730 </option>
+<option value="347000-lbs-Co2">347,000 lbs CO2 -$1,735 </option>
+<option value="348000-lbs-Co2">348,000 lbs CO2 -$1,740 </option>
+<option value="349000-lbs-Co2">349,000 lbs CO2 -$1,745 </option>
+
+<option value="350000-lbs-Co2">350,000 lbs CO2 -$1,750 </option>
+<option value="351000-lbs-Co2">351,000 lbs CO2 -$1,755 </option>
+<option value="352000-lbs-Co2">352,000 lbs CO2 -$1,760 </option>
+<option value="353000-lbs-Co2">353,000 lbs CO2 -$1,765 </option>
+<option value="354000-lbs-Co2">354,000 lbs CO2 -$1,770 </option>
+<option value="355000-lbs-Co2">355,000 lbs CO2 -$1,775 </option>
+<option value="356000-lbs-Co2">356,000 lbs CO2 -$1,780 </option>
+<option value="357000-lbs-Co2">357,000 lbs CO2 -$1,785 </option>
+<option value="358000-lbs-Co2">358,000 lbs CO2 -$1,790 </option>
+
+<option value="359000-lbs-Co2">359,000 lbs CO2 -$1,795 </option>
+<option value="360000-lbs-Co2">360,000 lbs CO2 -$1,800 </option>
+<option value="361000-lbs-Co2">361,000 lbs CO2 -$1,805 </option>
+<option value="362000-lbs-Co2">362,000 lbs CO2 -$1,810 </option>
+<option value="363000-lbs-Co2">363,000 lbs CO2 -$1,815 </option>
+<option value="364000-lbs-Co2">364,000 lbs CO2 -$1,820 </option>
+<option value="365000-lbs-Co2">365,000 lbs CO2 -$1,825 </option>
+<option value="366000-lbs-Co2">366,000 lbs CO2 -$1,830 </option>
+<option value="367000-lbs-Co2">367,000 lbs CO2 -$1,835 </option>
+
+<option value="368000-lbs-Co2">368,000 lbs CO2 -$1,840 </option>
+<option value="369000-lbs-Co2">369,000 lbs CO2 -$1,845 </option>
+<option value="370000-lbs-Co2">370,000 lbs CO2 -$1,850 </option>
+<option value="371000-lbs-Co2">371,000 lbs CO2 -$1,855 </option>
+<option value="372000-lbs-Co2">372,000 lbs CO2 -$1,860 </option>
+<option value="373000-lbs-Co2">373,000 lbs CO2 -$1,865 </option>
+<option value="374000-lbs-Co2">374,000 lbs CO2 -$1,870 </option>
+<option value="375000-lbs-Co2">375,000 lbs CO2 -$1,875 </option>
+<option value="376000-lbs-Co2">376,000 lbs CO2 -$1,880 </option>
+
+<option value="377000-lbs-Co2">377,000 lbs CO2 -$1,885 </option>
+<option value="378000-lbs-Co2">378,000 lbs CO2 -$1,890 </option>
+<option value="379000-lbs-Co2">379,000 lbs CO2 -$1,895 </option>
+<option value="380000-lbs-Co2">380,000 lbs CO2 -$1,900 </option>
+<option value="381000-lbs-Co2">381,000 lbs CO2 -$1,905 </option>
+<option value="382000-lbs-Co2">382,000 lbs CO2 -$1,910 </option>
+<option value="383000-lbs-Co2">383,000 lbs CO2 -$1,915 </option>
+<option value="384000-lbs-Co2">384,000 lbs CO2 -$1,920 </option>
+<option value="385000-lbs-Co2">385,000 lbs CO2 -$1,925 </option>
+
+<option value="386000-lbs-Co2">386,000 lbs CO2 -$1,930 </option>
+<option value="387000-lbs-Co2">387,000 lbs CO2 -$1,935 </option>
+<option value="388000-lbs-Co2">388,000 lbs CO2 -$1,940 </option>
+<option value="389000-lbs-Co2">389,000 lbs CO2 -$1,945 </option>
+<option value="390000-lbs-Co2">390,000 lbs CO2 -$1,950 </option>
+<option value="391000-lbs-Co2">391,000 lbs CO2 -$1,955 </option>
+<option value="392000-lbs-Co2">392,000 lbs CO2 -$1,960 </option>
+<option value="393000-lbs-Co2">393,000 lbs CO2 -$1,965 </option>
+<option value="394000-lbs-Co2">394,000 lbs CO2 -$1,970 </option>
+
+<option value="395000-lbs-Co2">395,000 lbs CO2 -$1,975 </option>
+<option value="396000-lbs-Co2">396,000 lbs CO2 -$1,980 </option>
+<option value="397000-lbs-Co2">397,000 lbs CO2 -$1,985 </option>
+<option value="398000-lbs-Co2">398,000 lbs CO2 -$1,990 </option>
+<option value="399000-lbs-Co2">399,000 lbs CO2 -$1,995 </option>
+<option value="400000-lbs-Co2">400,000 lbs CO2 -$2,000 </option>
+<option value="401000-lbs-Co2">401,000 lbs CO2 -$2,005 </option>
+<option value="402000-lbs-Co2">402,000 lbs CO2 -$2,010 </option>
+<option value="403000-lbs-Co2">403,000 lbs CO2 -$2,015 </option>
+
+<option value="404000-lbs-Co2">404,000 lbs CO2 -$2,020 </option>
+<option value="405000-lbs-Co2">405,000 lbs CO2 -$2,025 </option>
+<option value="406000-lbs-Co2">406,000 lbs CO2 -$2,030 </option>
+<option value="407000-lbs-Co2">407,000 lbs CO2 -$2,035 </option>
+<option value="408000-lbs-Co2">408,000 lbs CO2 -$2,040 </option>
+<option value="409000-lbs-Co2">409,000 lbs CO2 -$2,045 </option>
+<option value="410000-lbs-Co2">410,000 lbs CO2 -$2,050 </option>
+<option value="411000-lbs-Co2">411,000 lbs CO2 -$2,055 </option>
+<option value="412000-lbs-Co2">412,000 lbs CO2 -$2,060 </option>
+
+<option value="413000-lbs-Co2">413,000 lbs CO2 -$2,065 </option>
+<option value="414000-lbs-Co2">414,000 lbs CO2 -$2,070 </option>
+<option value="415000-lbs-Co2">415,000 lbs CO2 -$2,075 </option>
+<option value="416000-lbs-Co2">416,000 lbs CO2 -$2,080 </option>
+<option value="417000-lbs-Co2">417,000 lbs CO2 -$2,085 </option>
+<option value="418000-lbs-Co2">418,000 lbs CO2 -$2,090 </option>
+<option value="419000-lbs-Co2">419,000 lbs CO2 -$2,095 </option>
+<option value="420000-lbs-Co2">42,0000 lbs CO2 -$2,100 </option>
+<option value="421000-lbs-Co2">421,000 lbs CO2 -$2,105 </option>
+
+<option value="422000-lbs-Co2">422,000 lbs CO2 -$2,110 </option>
+<option value="423000-lbs-Co2">423,000 lbs CO2 -$2,115 </option>
+<option value="424000-lbs-Co2">424,000 lbs CO2 -$2,120 </option>
+<option value="425000-lbs-Co2">425,000 lbs CO2 -$2,125 </option>
+<option value="426000-lbs-Co2">426,000 lbs CO2 -$2,130 </option>
+<option value="427000-lbs-Co2">427,000 lbs CO2 -$2,135 </option>
+<option value="428000-lbs-Co2">428,000 lbs CO2 -$2,140 </option>
+<option value="429000-lbs-Co2">429,000 lbs CO2 -$2,145 </option>
+<option value="430000-lbs-Co2">430,000 lbs CO2 -$2,150 </option>
+
+<option value="431000-lbs-Co2">431,000 lbs CO2 -$2,155 </option>
+<option value="432000-lbs-Co2">432,000 lbs CO2 -$2,160 </option>
+<option value="433000-lbs-Co2">433,000 lbs CO2 -$2,165 </option>
+<option value="434000-lbs-Co2">434,000 lbs CO2 -$2,170 </option>
+<option value="435000-lbs-Co2">435,000 lbs CO2 -$2,175 </option>
+<option value="436000-lbs-Co2">436,000 lbs CO2 -$2,180 </option>
+<option value="437000-lbs-Co2">437,000 lbs CO2 -$2,185 </option>
+<option value="438000-lbs-Co2">438,000 lbs CO2 -$2,190 </option>
+<option value="439000-lbs-Co2">439,000 lbs CO2 -$2,195 </option>
+
+<option value="440000-lbs-Co2">440,000 lbs CO2 -$2,200 </option>
+<option value="441000-lbs-Co2">441,000 lbs CO2 -$2,205 </option>
+<option value="442000-lbs-Co2">442,000 lbs CO2 -$2,210 </option>
+<option value="443000-lbs-Co2">443,000 lbs CO2 -$2,215 </option>
+<option value="444000-lbs-Co2">444,000 lbs CO2 -$2,220 </option>
+<option value="445000-lbs-Co2">445,000 lbs CO2 -$2,225 </option>
+<option value="446000-lbs-Co2">446,000 lbs CO2 -$2,230 </option>
+<option value="447000-lbs-Co2">447,000 lbs CO2 -$2,235 </option>
+<option value="448000-lbs-Co2">448,000 lbs CO2 -$2,240 </option>
+
+<option value="449000-lbs-Co2">449,000 lbs CO2 -$2,245 </option>
+<option value="450000-lbs-Co2">450,000 lbs CO2 -$2,250 </option>
+<option value="451000-lbs-Co2">451,000 lbs CO2 -$2,255 </option>
+<option value="452000-lbs-Co2">452,000 lbs CO2 -$2,260 </option>
+<option value="453000-lbs-Co2">453,000 lbs CO2 -$2,265 </option>
+<option value="454000-lbs-Co2">454,000 lbs CO2 -$2,270 </option>
+<option value="455000-lbs-Co2">455,000 lbs CO2 -$2,275 </option>
+<option value="456000-lbs-Co2">456,000 lbs CO2 -$2,280 </option>
+<option value="457000-lbs-Co2">457,000 lbs CO2 -$2,285 </option>
+
+<option value="458000-lbs-Co2">458,000 lbs CO2 -$2,290 </option>
+<option value="459000-lbs-Co2">459,000 lbs CO2 -$2,295 </option>
+<option value="460000-lbs-Co2">460,000 lbs CO2 -$2,300 </option>
+<option value="461000-lbs-Co2">461,000 lbs CO2 -$2,305 </option>
+<option value="462000-lbs-Co2">462,000 lbs CO2 -$2,310 </option>
+<option value="463000-lbs-Co2">463,000 lbs CO2 -$2,315 </option>
+<option value="464000-lbs-Co2">464,000 lbs CO2 -$2,320 </option>
+<option value="465000-lbs-Co2">465,000 lbs CO2 -$2,325 </option>
+<option value="466000-lbs-Co2">466,000 lbs CO2 -$2,330 </option>
+
+<option value="467000-lbs-Co2">467,000 lbs CO2 -$2,335 </option>
+<option value="468000-lbs-Co2">468,000 lbs CO2 -$2,340 </option>
+<option value="469000-lbs-Co2">469,000 lbs CO2 -$2,345 </option>
+<option value="470000-lbs-Co2">470,000 lbs CO2 -$2,350 </option>
+<option value="471000-lbs-Co2">471,000 lbs CO2 -$2,355 </option>
+<option value="472000-lbs-Co2">472,000 lbs CO2 -$2,360 </option>
+<option value="473000-lbs-Co2">473,000 lbs CO2 -$2,365 </option>
+<option value="474000-lbs-Co2">474,000 lbs CO2 -$2,370 </option>
+<option value="475000-lbs-Co2">475,000 lbs CO2 -$2,375 </option>
+
+<option value="476000-lbs-Co2">476,000 lbs CO2 -$2,380 </option>
+<option value="477000-lbs-Co2">477,000 lbs CO2 -$2,385 </option>
+<option value="478000-lbs-Co2">478,000 lbs CO2 -$2,390 </option>
+<option value="479000-lbs-Co2">479,000 lbs CO2 -$2,395 </option>
+<option value="480000-lbs-Co2">480,000 lbs CO2 -$2,400 </option>
+<option value="481000-lbs-Co2">481,000 lbs CO2 -$2,405 </option>
+<option value="482000-lbs-Co2">482,000 lbs CO2 -$2,410 </option>
+<option value="483000-lbs-Co2">483,000 lbs CO2 -$2,415 </option>
+<option value="484000-lbs-Co2">484,000 lbs CO2 -$2,420 </option>
+
+<option value="485000-lbs-Co2">485,000 lbs CO2 -$2,425 </option>
+<option value="486000-lbs-Co2">486,000 lbs CO2 -$2,430 </option>
+<option value="487000-lbs-Co2">487,000 lbs CO2 -$2,435 </option>
+<option value="488000-lbs-Co2">488,000 lbs CO2 -$2,440 </option>
+<option value="489000-lbs-Co2">489,000 lbs CO2 -$2,445 </option>
+<option value="490000-lbs-Co2">490,000 lbs CO2 -$2,450 </option>
+<option value="491000-lbs-Co2">491,000 lbs CO2 -$2,455 </option>
+<option value="492000-lbs-Co2">492,000 lbs CO2 -$2,460 </option>
+<option value="493000-lbs-Co2">493,000 lbs CO2 -$2,465 </option>
+
+<option value="494000-lbs-Co2">494,000 lbs CO2 -$2,470 </option>
+<option value="495000-lbs-Co2">495,000 lbs CO2 -$2,475 </option>
+<option value="496000-lbs-Co2">496,000 lbs CO2 -$2,480 </option>
+<option value="497000-lbs-Co2">497,000 lbs CO2 -$2,485 </option>
+<option value="498000-lbs-Co2">498,000 lbs CO2 -$2,490 </option>
+<option value="499000-lbs-Co2">499,000 lbs CO2 -$2,495 </option>
+<option value="500000-lbs-Co2">500,000 lbs CO2 -$2,500 </option>
+<option value="501000-lbs-CO2">501,000 lbs CO2 -$2,505 </option>
+<option value="502000-lbs-CO2">502,000 lbs CO2 -$2,510 </option>
+
+<option value="503000-lbs-CO2">503,000 lbs CO2 -$2,515 </option>
+<option value="504000-lbs-CO2">504,000 lbs CO2 -$2,520 </option>
+<option value="505000-lbs-CO2">505.000 lbs CO2 -$2,525 </option>
+<option value="506000-lbs-CO2">506,000 lbs CO2 -$2,530 </option>
+<option value="507000-lbs-CO2">507,000 lbs CO2 -$2,535 </option>
+<option value="508000-lbs-CO2">508,000 lbs CO2 -$2,540 </option>
+<option value="509000-lbs-CO2">509,000 lbs CO2 -$2,545 </option>
+<option value="510000-lbs-CO2">510,000 lbs CO2 -$2,550 </option>
+<option value="511000-lbs-CO2">511,000 lbs CO2 -$2,555 </option>
+
+<option value="512000-lbs-CO2">512,000 lbs CO2 -$2,560 </option>
+<option value="513000-lbs-CO2">513,000 lbs CO2 -$2,565 </option>
+<option value="514000-lbs-CO2">514,000 lbs CO2 -$2,570 </option>
+<option value="515000-lbs-CO2">515,000 lbs CO2 -$2,575 </option>
+<option value="516000-lbs-CO2">516,000 lbs CO2 -$2,580 </option>
+<option value="517000-lbs-CO2">517,000 lbs CO2 -$2,585 </option>
+<option value="518000-lbs-CO2">518,000 lbs CO2 -$2,590 </option>
+<option value="519000-lbs-CO2">519,000 lbs CO2 -$2,595 </option>
+<option value="520000-lbs-CO2">520,000 lbs CO2 -$2,600 </option>
+
+<option value="521000-lbs-CO2">521,000 lbs CO2 -$2,605 </option>
+<option value="522000-lbs-CO2">522,000 lbs CO2 -$2,610 </option>
+<option value="523000-lbs-CO2">523,000 lbs CO2 -$2,615 </option>
+<option value="524000-lbs-CO2">524,000 lbs CO2 -$2,620 </option>
+<option value="525000-lbs-CO2">525,000 lbs CO2 -$2,625 </option>
+<option value="526000-lbs-CO2">526,000 lbs CO2 -$2,630 </option>
+<option value="527000-lbs-CO2">527,000 lbs CO2 -$2,635 </option>
+<option value="528000-lbs-CO2">528,000 lbs CO2 -$2,640 </option>
+<option value="529000-lbs-CO2">529,000 lbs CO2 -$2,645 </option>
+
+<option value="530000-lbs-CO2">530,000 lbs CO2 -$2,650 </option>
+<option value="531000-lbs-CO2">531,000 lbs CO2 -$2,655 </option>
+<option value="532000-lbs-CO2">532,000 lbs CO2 -$2,660 </option>
+<option value="533000-lbs-CO2">533,000 lbs CO2 -$2,665 </option>
+<option value="534000-lbs-CO2">534,000 lbs CO2 -$2,670 </option>
+<option value="535000-lbs-CO2">535,000 lbs CO2 -$2,675 </option>
+<option value="536000-lbs-CO2">536,000 lbs CO2 -$2,680 </option>
+<option value="537000-lbs-CO2">537,000 lbs CO2 -$2,685 </option>
+<option value="538000-lbs-CO2">538,000 lbs CO2 -$2,690 </option>
+
+<option value="539000-lbs-CO2">539,000 lbs CO2 -$2,695 </option>
+<option value="540000-lbs-CO2">540,000 lbs CO2 -$2,700 </option>
+<option value="541000-lbs-CO2">541,000 lbs CO2 -$2,705 </option>
+<option value="542000-lbs-CO2">542,000 lbs CO2 -$2,710 </option>
+<option value="543000-lbs-CO2">543,000 lbs CO2 -$2,715 </option>
+<option value="544000-lbs-CO2">544,000 lbs CO2 -$2,720 </option>
+<option value="545000-lbs-CO2">545,000 lbs CO2 -$2,725 </option>
+<option value="546000-lbs-CO2">546,000 lbs CO2 -$2,730 </option>
+<option value="547000-lbs-CO2">547,000 lbs CO2 -$2,735 </option>
+
+<option value="548000-lbs-CO2">548,000 lbs CO2 -$2,740 </option>
+<option value="549000-lbs-CO2">549,000 lbs CO2 -$2,745 </option>
+<option value="550000-lbs-CO2">550,000 lbs CO2 -$2,750 </option>
+<option value="551000-lbs-CO2">551,000 lbs CO2 -$2,755 </option>
+<option value="552000-lbs-CO2">552,000 lbs CO2 -$2,760 </option>
+<option value="553000-lbs-CO2">553,000 lbs CO2 -$2,765 </option>
+<option value="554000-lbs-CO2">554,000 lbs CO2 -$2,770 </option>
+<option value="555000-lbs-CO2">555,000 lbs CO2 -$2,775 </option>
+<option value="556000-lbs-CO2">556,000 lbs CO2 -$2,780 </option>
+
+<option value="557000-lbs-CO2">557,000 lbs CO2 -$2,785 </option>
+<option value="558000-lbs-CO2">558,000 lbs CO2 -$2,790 </option>
+<option value="559000-lbs-CO2">559,000 lbs CO2 -$2,795 </option>
+<option value="560000-lbs-CO2">560,000 lbs CO2 -$2,800 </option>
+<option value="561000-lbs-CO2">561,000 lbs CO2 -$2,805 </option>
+<option value="562000-lbs-CO2">562,000 lbs CO2 -$2,810 </option>
+<option value="563000-lbs-CO2">563,000 lbs CO2 -$2,815 </option>
+<option value="564000-lbs-CO2">564,000 lbs CO2 -$2,820 </option>
+<option value="565000-lbs-CO2">565,000 lbs CO2 -$2,825 </option>
+
+<option value="566000-lbs-CO2">566,000 lbs CO2 -$2,830 </option>
+<option value="567000-lbs-CO2">567,000 lbs CO2 -$2,835 </option>
+<option value="568000-lbs-CO2">568,000 lbs CO2 -$2,840 </option>
+<option value="569000-lbs-CO2">569,000 lbs CO2 -$2,845 </option>
+<option value="570000-lbs-CO2">570,000 lbs CO2 -$2,850 </option>
+<option value="571000-lbs-CO2">571,000 lbs CO2 -$2,855 </option>
+<option value="572000-lbs-CO2">572,000 lbs CO2 -$2,860 </option>
+<option value="573000-lbs-CO2">573,000 lbs CO2 -$2,865 </option>
+<option value="574000-lbs-CO2">574,000 lbs CO2 -$2,870 </option>
+
+<option value="575000-lbs-CO2">575,000 lbs CO2 -$2,875 </option>
+<option value="576000-lbs-CO2">576,000 lbs CO2 -$2,880 </option>
+<option value="577000-lbs-CO2">577,000 lbs CO2 -$2,885 </option>
+<option value="578000-lbs-CO2">578,000 lbs CO2 -$2,890 </option>
+<option value="579000-lbs-CO2">579,000 lbs CO2 -$2,895 </option>
+<option value="580000-lbs-CO2">580,000 lbs CO2 -$2,900 </option>
+<option value="581000-lbs-CO2">581,000 lbs CO2 -$2,905 </option>
+<option value="582000-lbs-CO2">582,000 lbs CO2 -$2,910 </option>
+<option value="583000-lbs-CO2">583,000 lbs CO2 -$2,915 </option>
+
+<option value="584000-lbs-CO2">584,000 lbs CO2 -$2,920 </option>
+<option value="585000-lbs-CO2">585,000 lbs CO2 -$2,925 </option>
+<option value="586000-lbs-CO2">586,000 lbs CO2 -$2,930 </option>
+<option value="587000-lbs-CO2">587,000 lbs CO2 -$2,935 </option>
+<option value="588000-lbs-CO2">588,000 lbs CO2 -$2,940 </option>
+<option value="589000-lbs-CO2">589,000 lbs CO2 -$2,945 </option>
+<option value="590000-lbs-CO2">590,000 lbs CO2 -$2,950 </option>
+<option value="591000-lbs-CO2">591,000 lbs CO2 -$2,955 </option>
+<option value="592000-lbs-CO2">592,000 lbs CO2 -$2,960 </option>
+
+<option value="593000-lbs-CO2">593,000 lbs CO2 -$2,965 </option>
+<option value="594000-lbs-CO2">594,000 lbs CO2 -$2,970 </option>
+<option value="595000-lbs-CO2">595,000 lbs CO2 -$2,975 </option>
+<option value="596000-lbs-CO2">596,000 lbs CO2 -$2,980 </option>
+<option value="597000-lbs-CO2">597,000 lbs CO2 -$2,985 </option>
+<option value="598000-lbs-CO2">598,000 lbs CO2 -$2,990 </option>
+<option value="599000-lbs-CO2">599,000 lbs CO2 -$2,995 </option>
+<option value="600000-lbs-CO2">600,000 lbs CO2 -$3,000 </option>
+<option value="601000-lbs-CO2">601,000 lbs CO2 -$3,005 </option>
+
+<option value="602000-lbs-CO2">602,000 lbs CO2 -$3,010 </option>
+<option value="603000-lbs-CO2">603,000 lbs CO2 -$3,015 </option>
+<option value="604000-lbs-CO2">604,000 lbs CO2 -$3,020 </option>
+<option value="605000-lbs-CO2">605,000 lbs CO2 -$3,025 </option>
+<option value="606000-lbs-CO2">606,000 lbs CO2 -$3,030 </option>
+<option value="607000-lbs-CO2">607,000 lbs CO2 -$3,035 </option>
+<option value="608000-lbs-CO2">608,000 lbs CO2 -$3,040 </option>
+<option value="609000-lbs-CO2">609,000 lbs CO2 -$3,045 </option>
+<option value="610000-lbs-CO2">610,000 lbs CO2 -$3,050 </option>
+
+<option value="611000-lbs-CO2">611,000 lbs CO2 -$3,055 </option>
+<option value="612000-lbs-CO2">612,000 lbs CO2 -$3,060 </option>
+<option value="613000-lbs-CO2">613,000 lbs CO2 -$3,065 </option>
+<option value="614000-lbs-CO2">614,000 lbs CO2 -$3,070 </option>
+<option value="615000-lbs-CO2">615,000 lbs CO2 -$3,075 </option>
+<option value="616000-lbs-CO2">616,000 lbs CO2 -$3,080 </option>
+<option value="617000-lbs-CO2">617,000 lbs CO2 -$3,085 </option>
+<option value="618000-lbs-CO2">618,000 lbs CO2 -$3,090 </option>
+<option value="619000-lbs-CO2">619,000 lbs CO2 -$3,095 </option>
+
+<option value="620000-lbs-CO2">620,000 lbs CO2 -$3,100 </option>
+<option value="621000-lbs-CO2">621,000 lbs CO2 -$3,105 </option>
+<option value="622000-lbs-CO2">622,000 lbs CO2 -$3,110 </option>
+<option value="623000-lbs-CO2">623,000 lbs CO2 -$3,115 </option>
+<option value="624000-lbs-CO2">624,000 lbs CO2 -$3,120 </option>
+<option value="625000-lbs-CO2">625,000 lbs CO2 -$3,125 </option>
+<option value="626000-lbs-CO2">626,000 lbs CO2 -$3,130 </option>
+<option value="627000-lbs-CO2">627,000 lbs CO2 -$3,135 </option>
+<option value="628000-lbs-CO2">628,000 lbs CO2 -$3,140 </option>
+
+<option value="629000-lbs-CO2">629,000 lbs CO2 -$3,145 </option>
+<option value="630000-lbs-CO2">630,000 lbs CO2 -$3,150 </option>
+<option value="631000-lbs-CO2">631,000 lbs CO2 -$3,155 </option>
+<option value="632000-lbs-CO2">632,000 lbs CO2 -$3,160 </option>
+<option value="633000-lbs-CO2">633,000 lbs CO2 -$3,165 </option>
+<option value="634000-lbs-CO2">634,000 lbs CO2 -$3,170 </option>
+<option value="635000-lbs-CO2">635,000 lbs CO2 -$3,175 </option>
+<option value="636000-lbs-CO2">636,000 lbs CO2 -$3,180 </option>
+<option value="637000-lbs-CO2">637,000 lbs CO2 -$3,185 </option>
+
+<option value="638000-lbs-CO2">638,000 lbs CO2 -$3,190 </option>
+<option value="639000-lbs-CO2">639,000 lbs CO2 -$3,195 </option>
+<option value="640000-lbs-CO2">640,000 lbs CO2 -$3,200 </option>
+<option value="641000-lbs-CO2">641,000 lbs CO2 -$3,205 </option>
+<option value="642000-lbs-CO2">642,000 lbs CO2 -$3,210 </option>
+<option value="643000-lbs-CO2">643,000 lbs CO2 -$3,215 </option>
+<option value="644000-lbs-CO2">644,000 lbs CO2 -$3,220 </option>
+<option value="645000-lbs-CO2">645,000 lbs CO2 -$3,225 </option>
+<option value="646000-lbs-CO2">646,000 lbs CO2 -$3,230 </option>
+
+<option value="647000-lbs-CO2">647,000 lbs CO2 -$3,235 </option>
+<option value="648000-lbs-CO2">648,000 lbs CO2 -$3,240 </option>
+<option value="649000-lbs-CO2">649,000 lbs CO2 -$3,245 </option>
+<option value="650000-lbs-CO2">650,000 lbs CO2 -$3,250 </option>
+<option value="651000-lbs-CO2">651,000 lbs CO2 -$3,255 </option>
+<option value="652000-lbs-CO2">652,000 lbs CO2 -$3,260 </option>
+<option value="653000-lbs-CO2">653,000 lbs CO2 -$3,265 </option>
+<option value="654000-lbs-CO2">654,000 lbs CO2 -$3,270 </option>
+<option value="655000-lbs-CO2">655,000 lbs CO2 -$3,275 </option>
+
+<option value="656000-lbs-CO2">656,000 lbs CO2 -$3,280 </option>
+<option value="657000-lbs-CO2">657,000 lbs CO2 -$3,285 </option>
+<option value="658000-lbs-CO2">658,000 lbs CO2 -$3,290 </option>
+<option value="659000-lbs-CO2">659,000 lbs CO2 -$3,295 </option>
+<option value="660000-lbs-CO2">660,000 lbs CO2 -$3,300 </option>
+<option value="661000-lbs-CO2">661,000 lbs CO2 -$3,305 </option>
+<option value="662000-lbs-CO2">662,000 lbs CO2 -$3,310 </option>
+<option value="663000-lbs-CO2">663,000 lbs CO2 -$3,315 </option>
+<option value="664000-lbs-CO2">664,000 lbs CO2 -$3,320 </option>
+
+<option value="665000-lbs-CO2">665,000 lbs CO2 -$3,325 </option>
+<option value="666000-lbs-CO2">666,000 lbs CO2 -$3,330 </option>
+<option value="667000-lbs-CO2">667,000 lbs CO2 -$3,335 </option>
+<option value="668000-lbs-CO2">668,000 lbs CO2 -$3,340 </option>
+<option value="669000-lbs-CO2">669,000 lbs CO2 -$3,345 </option>
+<option value="670000-lbs-CO2">670,000 lbs CO2 -$3,350 </option>
+<option value="671000-lbs-CO2">671,000 lbs CO2 -$3,355 </option>
+<option value="672000-lbs-CO2">672,000 lbs CO2 -$3,360 </option>
+<option value="673000-lbs-CO2">673,000 lbs CO2 -$3,365 </option>
+
+<option value="674000-lbs-CO2">674,000 lbs CO2 -$3,370 </option>
+<option value="675000-lbs-CO2">675,000 lbs CO2 -$3,375 </option>
+<option value="676000-lbs-CO2">676,000 lbs CO2 -$3,380 </option>
+<option value="677000-lbs-CO2">677,000 lbs CO2 -$3,385 </option>
+<option value="678000-lbs-CO2">678,000 lbs CO2 -$3,390 </option>
+<option value="679000-lbs-CO2">679,000 lbs CO2 -$3,395 </option>
+<option value="680000-lbs-CO2">680,000 lbs CO2 -$3,400 </option>
+<option value="681000-lbs-CO2">681,000 lbs CO2 -$3,405 </option>
+<option value="682000-lbs-CO2">682,000 lbs CO2 -$3,410 </option>
+
+<option value="683000-lbs-CO2">683,000 lbs CO2 -$3,415 </option>
+<option value="684000-lbs-CO2">684,000 lbs CO2 -$3,420 </option>
+<option value="685000-lbs-CO2">685,000 lbs CO2 -$3,425 </option>
+<option value="686000-lbs-CO2">686,000 lbs CO2 -$3,430 </option>
+<option value="687000-lbs-CO2">687,000 lbs CO2 -$3,435 </option>
+<option value="688000-lbs-CO2">688,000 lbs CO2 -$3,440 </option>
+<option value="689000-lbs-CO2">689,000 lbs CO2 -$3,445 </option>
+<option value="690000-lbs-CO2">690,000 lbs CO2 -$3,450 </option>
+<option value="691000-lbs-CO2">691,000 lbs CO2 -$3,455 </option>
+
+<option value="692000-lbs-CO2">692,000 lbs CO2 -$3,460 </option>
+<option value="693000-lbs-CO2">693,000 lbs CO2 -$3,465 </option>
+<option value="694000-lbs-CO2">694,000 lbs CO2 -$3,470 </option>
+<option value="695000-lbs-CO2">695,000 lbs CO2 -$3,475 </option>
+<option value="696000-lbs-CO2">696,000 lbs CO2 -$3,480 </option>
+<option value="697000-lbs-CO2">697,000 lbs CO2 -$3,485 </option>
+<option value="698000-lbs-CO2">698,000 lbs CO2 -$3,490 </option>
+<option value="699000-lbs-CO2">699,000 lbs CO2 -$3,495 </option>
+<option value="700000-lbs-CO2">700,000 lbs CO2 -$3,500 </option>
+
+<option value="701000-lbs-CO2">701,000 lbs CO2 -$3,505 </option>
+<option value="702000-lbs-CO2">702,000 lbs CO2 -$3,510 </option>
+<option value="703000-lbs-CO2">703,000 lbs CO2 -$3,515 </option>
+<option value="704000-lbs-CO2">704,000 lbs CO2 -$3,520 </option>
+<option value="705000-lbs-CO2">705,000 lbs CO2 -$3,525 </option>
+<option value="706000-lbs-CO2">706,000 lbs CO2 -$3,530 </option>
+<option value="707000-lbs-CO2">707,000 lbs CO2 -$3,535 </option>
+<option value="708000-lbs-CO2">708,000 lbs CO2 -$3,540 </option>
+<option value="709000-lbs-CO2">709,000 lbs CO2 -$3,545 </option>
+
+<option value="710000-lbs-CO2">710,000 lbs CO2 -$3,550 </option>
+<option value="711000-lbs-CO2">711,000 lbs CO2 -$3,555 </option>
+<option value="712000-lbs-CO2">712,000 lbs CO2 -$3,560 </option>
+<option value="713000-lbs-CO2">713,000 lbs CO2 -$3,565 </option>
+<option value="714000-lbs-CO2">714,000 lbs CO2 -$3,570 </option>
+<option value="715000-lbs-CO2">715,000 lbs CO2 -$3,575 </option>
+<option value="716000-lbs-CO2">716,000 lbs CO2 -$3,580 </option>
+<option value="717000-lbs-CO2">717,000 lbs CO2 -$3,585 </option>
+<option value="718000-lbs-CO2">718,000 lbs CO2 -$3,590 </option>
+
+<option value="719000-lbs-CO2">719,000 lbs CO2 -$3,595 </option>
+<option value="720000-lbs-CO2">720,000 lbs CO2 -$3,600 </option>
+<option value="721000-lbs-CO2">721,000 lbs CO2 -$3,605 </option>
+<option value="722000-lbs-CO2">722,000 lbs CO2 -$3,610 </option>
+<option value="723000-lbs-CO2">723,000 lbs CO2 -$3,615 </option>
+<option value="724000-lbs-CO2">724,000 lbs CO2 -$3,620 </option>
+<option value="725000-lbs-CO2">725,000 lbs CO2 -$3,625 </option>
+<option value="726000-lbs-CO2">726,000 lbs CO2 -$3,630 </option>
+<option value="727000-lbs-CO2">727,000 lbs CO2 -$3,635 </option>
+
+<option value="728000-lbs-CO2">728,000 lbs CO2 -$3,640 </option>
+<option value="729000-lbs-CO2">729,000 lbs CO2 -$3,645 </option>
+<option value="730000-lbs-CO2">730,000 lbs CO2 -$3,650 </option>
+<option value="731000-lbs-CO2">731,000 lbs CO2 -$3,655 </option>
+<option value="732000-lbs-CO2">732,000 lbs CO2 -$3,660 </option>
+<option value="733000-lbs-CO2">733,000 lbs CO2 -$3,665 </option>
+<option value="734000-lbs-CO2">734,000 lbs CO2 -$3,670 </option>
+<option value="735000-lbs-CO2">735,000 lbs CO2 -$3,675 </option>
+<option value="736000-lbs-CO2">736,000 lbs CO2 -$3,680 </option>
+
+<option value="737000-lbs-CO2">737,000 lbs CO2 -$3,685 </option>
+<option value="738000-lbs-CO2">738,000 lbs CO2 -$3,690 </option>
+<option value="739000-lbs-CO2">739,000 lbs CO2 -$3,695 </option>
+<option value="740000-lbs-CO2">740,000 lbs CO2 -$3,700 </option>
+<option value="741000-lbs-CO2">741,000 lbs CO2 -$3,705 </option>
+<option value="742000-lbs-CO2">742,000 lbs CO2 -$3,710 </option>
+<option value="743000-lbs-CO2">743,000 lbs CO2 -$3,715 </option>
+<option value="744000-lbs-CO2">744,000 lbs CO2 -$3,720 </option>
+<option value="745000-lbs-CO2">745,000 lbs CO2 -$3,725 </option>
+
+<option value="746000-lbs-CO2">746,000 lbs CO2 -$3,730 </option>
+<option value="747000-lbs-CO2">747,000 lbs CO2 -$3,735 </option>
+<option value="748000-lbs-CO2">748,000 lbs CO2 -$3,740 </option>
+<option value="749000-lbs-CO2">749,000 lbs CO2 -$3,745 </option>
+<option value="750000-lbs-CO2">750,000 lbs CO2 -$3,750 </option>
+<option value="751000-lbs-CO2">751,000 lbs CO2 -$3,755 </option>
+<option value="752000-lbs-CO2">752,000 lbs CO2 -$3,760 </option>
+<option value="753000-lbs-CO2">753,000 lbs CO2 -$3,765 </option>
+<option value="754000-lbs-CO2">754,000 lbs CO2 -$3,770 </option>
+
+<option value="755000-lbs-CO2">755,000 lbs CO2 -$3,775 </option>
+<option value="756000-lbs-CO2">756,000 lbs CO2 -$3,780 </option>
+<option value="757000-lbs-CO2">757,000 lbs CO2 -$3,785 </option>
+<option value="758000-lbs-CO2">758,000 lbs CO2 -$3,790 </option>
+<option value="759000-lbs-CO2">759,000 lbs CO2 -$3,795 </option>
+<option value="760000-lbs-CO2">760,000 lbs CO2 -$3,800 </option>
+<option value="761000-lbs-CO2">761,000 lbs CO2 -$3,805 </option>
+<option value="762000-lbs-CO2">762,000 lbs CO2 -$3,810 </option>
+<option value="763000-lbs-CO2">763,000 lbs CO2 -$3,815 </option>
+
+<option value="764000-lbs-CO2">764,000 lbs CO2 -$3,820 </option>
+<option value="765000-lbs-CO2">765,000 lbs CO2 -$3,825 </option>
+<option value="766000-lbs-CO2">766,000 lbs CO2 -$3,830 </option>
+<option value="767000-lbs-CO2">767,000 lbs CO2 -$3,835 </option>
+<option value="768000-lbs-CO2">768,000 lbs CO2 -$3,840 </option>
+<option value="769000-lbs-CO2">769,000 lbs CO2 -$3,845 </option>
+<option value="770000-lbs-CO2">770,000 lbs CO2 -$3,850 </option>
+<option value="771000-lbs-CO2">771,000 lbs CO2 -$3,855 </option>
+<option value="772000-lbs-CO2">772,000 lbs CO2 -$3,860 </option>
+
+<option value="773000-lbs-CO2">773,000 lbs CO2 -$3,865 </option>
+<option value="774000-lbs-CO2">774,000 lbs CO2 -$3,870 </option>
+<option value="775000-lbs-CO2">775,000 lbs CO2 -$3,875 </option>
+<option value="776000-lbs-CO2">776,000 lbs CO2 -$3,880 </option>
+<option value="777000-lbs-CO2">777,000 lbs CO2 -$3,885 </option>
+<option value="778000-lbs-CO2">778,000 lbs CO2 -$3,890 </option>
+<option value="779000-lbs-CO2">779,000 lbs CO2 -$3,895 </option>
+<option value="780000-lbs-CO2">780,000 lbs CO2 -$3,900 </option>
+<option value="781000-lbs-CO2">781,000 lbs CO2 -$3,905 </option>
+
+<option value="782000-lbs-CO2">782,000 lbs CO2 -$3,910 </option>
+<option value="783000-lbs-CO2">783,000 lbs CO2 -$3,915 </option>
+<option value="784000-lbs-CO2">784,000 lbs CO2 -$3,920 </option>
+<option value="785000-lbs-CO2">785,000 lbs CO2 -$3,925 </option>
+<option value="786000-lbs-CO2">786,000 lbs CO2 -$3,930 </option>
+<option value="787000-lbs-CO2">787,000 lbs CO2 -$3,935 </option>
+<option value="788000-lbs-CO2">788,000 lbs CO2 -$3,940 </option>
+<option value="789000-lbs-CO2">789,000 lbs CO2 -$3,945 </option>
+<option value="790000-lbs-CO2">790,000 lbs CO2 -$3,950 </option>
+
+<option value="791000-lbs-CO2">791,000 lbs CO2 -$3,955 </option>
+<option value="792000-lbs-CO2">792,000 lbs CO2 -$3,960 </option>
+<option value="793000-lbs-CO2">793,000 lbs CO2 -$3,965 </option>
+<option value="794000-lbs-CO2">794,000 lbs CO2 -$3,970 </option>
+<option value="795000-lbs-CO2">795,000 lbs CO2 -$3,975 </option>
+<option value="796000-lbs-CO2">796,000 lbs CO2 -$3,980 </option>
+<option value="797000-lbs-CO2">797,000 lbs CO2 -$3,985 </option>
+<option value="798000-lbs-CO2">798,000 lbs CO2 -$3,990 </option>
+<option value="799000-lbs-CO2">799,000 lbs CO2 -$3,995 </option>
+
+<option value="800000-lbs-CO2">800,000 lbs CO2 -$4,000 </option>
+<option value="801000-lbs-CO2">801,000 lbs CO2 -$4,005 </option>
+<option value="802000-lbs-CO2">802,000 lbs CO2 -$4,010 </option>
+<option value="803000-lbs-CO2">803,000 lbs CO2 -$4,015 </option>
+<option value="804000-lbs-CO2">804,000 lbs CO2 -$4,020 </option>
+<option value="805000-lbs-CO2">805,000 lbs CO2 -$4,025 </option>
+<option value="806000-lbs-CO2">806,000 lbs CO2 -$4,030 </option>
+<option value="807000-lbs-CO2">807,000 lbs CO2 -$4,035 </option>
+<option value="808000-lbs-CO2">808,000 lbs CO2 -$4,040 </option>
+
+<option value="809000-lbs-CO2">809,000 lbs CO2 -$4,045 </option>
+<option value="810000-lbs-CO2">810,000 lbs CO2 -$4,050 </option>
+<option value="811000-lbs-CO2">811,000 lbs CO2 -$4,055 </option>
+<option value="812000-lbs-CO2">812,000 lbs CO2 -$4,060 </option>
+<option value="813000-lbs-CO2">813,000 lbs CO2 -$4,065 </option>
+<option value="814000-lbs-CO2">814,000 lbs CO2 -$4,070 </option>
+<option value="815000-lbs-CO2">815,000 lbs CO2 -$4,075 </option>
+<option value="816000-lbs-CO2">816,000 lbs CO2 -$4,080 </option>
+<option value="817000-lbs-CO2">817,000 lbs CO2 -$4,085 </option>
+
+<option value="818000-lbs-CO2">818,000 lbs CO2 -$4,090 </option>
+<option value="819000-lbs-CO2">819,000 lbs CO2 -$4,095 </option>
+<option value="820000-lbs-CO2">820,000 lbs CO2 -$4,100 </option>
+<option value="821000-lbs-CO2">821,000 lbs CO2 -$4,105 </option>
+<option value="822000-lbs-CO2">822,000 lbs CO2 -$4,110 </option>
+<option value="823000-lbs-CO2">823,000 lbs CO2 -$4,115 </option>
+<option value="824000-lbs-CO2">824,000 lbs CO2 -$4,120 </option>
+<option value="825000-lbs-CO2">825,000 lbs CO2 -$4,125 </option>
+<option value="826000-lbs-CO2">826,000 lbs CO2 -$4,130 </option>
+
+<option value="827000-lbs-CO2">827,000 lbs CO2 -$4,135 </option>
+<option value="828000-lbs-CO2">828,000 lbs CO2 -$4,140 </option>
+<option value="829000-lbs-CO2">829,000 lbs CO2 -$4,145 </option>
+<option value="830000-lbs-CO2">830,000 lbs CO2 -$4,150 </option>
+<option value="831000-lbs-CO2">831,000 lbs CO2 -$4,155 </option>
+<option value="832000-lbs-CO2">832,000 lbs CO2 -$4,160 </option>
+<option value="833000-lbs-CO2">833,000 lbs CO2 -$4,165 </option>
+<option value="834000-lbs-CO2">834,000 lbs CO2 -$4,170 </option>
+<option value="835000-lbs-CO2">835,000 lbs CO2 -$4,175 </option>
+
+<option value="836000-lbs-CO2">836,000 lbs CO2 -$4,180 </option>
+<option value="837000-lbs-CO2">837,000 lbs CO2 -$4,185 </option>
+<option value="838000-lbs-CO2">838,000 lbs CO2 -$4,190 </option>
+<option value="839000-lbs-CO2">839,000 lbs CO2 -$4,195 </option>
+<option value="840000-lbs-CO2">840,000 lbs CO2 -$4,200 </option>
+<option value="841000-lbs-CO2">841,000 lbs CO2 -$4,205 </option>
+<option value="842000-lbs-CO2">842,000 lbs CO2 -$4,210 </option>
+<option value="843000-lbs-CO2">843,000 lbs CO2 -$4,215 </option>
+<option value="844000-lbs-CO2">844,000 lbs CO2 -$4,220 </option>
+
+<option value="845000-lbs-CO2">845,000 lbs CO2 -$4,225 </option>
+<option value="846000-lbs-CO2">846,000 lbs CO2 -$4,230 </option>
+<option value="847000-lbs-CO2">847,000 lbs CO2 -$4,235 </option>
+<option value="848000-lbs-CO2">848,000 lbs CO2 -$4,240 </option>
+<option value="849000-lbs-CO2">849,000 lbs CO2 -$4,245 </option>
+<option value="850000-lbs-CO2">850,000 lbs CO2 -$4,250 </option>
+<option value="851000-lbs-CO2">851,000 lbs CO2 -$4,255 </option>
+<option value="852000-lbs-CO2">852,000 lbs CO2 -$4,260 </option>
+<option value="853000-lbs-CO2">853,000 lbs CO2 -$4,265 </option>
+
+<option value="854000-lbs-CO2">854,000 lbs CO2 -$4,270 </option>
+<option value="855000-lbs-CO2">855,000 lbs CO2 -$4,275 </option>
+<option value="856000-lbs-CO2">856,000 lbs CO2 -$4,280 </option>
+<option value="857000-lbs-CO2">857,000 lbs CO2 -$4,285 </option>
+<option value="858000-lbs-CO2">858,000 lbs CO2 -$4,290 </option>
+<option value="859000-lbs-CO2">859,000 lbs CO2 -$4,295 </option>
+<option value="860000-lbs-CO2">860,000 lbs CO2 -$4,300 </option>
+<option value="861000-lbs-CO2">861,000 lbs CO2 -$4,305 </option>
+<option value="862000-lbs-CO2">862,000 lbs CO2 -$4,310 </option>
+
+<option value="863000-lbs-CO2">863,000 lbs CO2 -$4,315 </option>
+<option value="864000-lbs-CO2">864,000 lbs CO2 -$4,320 </option>
+<option value="865000-lbs-CO2">865,000 lbs CO2 -$4,325 </option>
+<option value="866000-lbs-CO2">866,000 lbs CO2 -$4,330 </option>
+<option value="867000-lbs-CO2">867,000 lbs CO2 -$4,335 </option>
+<option value="868000-lbs-CO2">868,000 lbs CO2 -$4,340 </option>
+<option value="869000-lbs-CO2">869,000 lbs CO2 -$4,345 </option>
+<option value="870000-lbs-CO2">870,000 lbs CO2 -$4,350 </option>
+<option value="871000-lbs-CO2">871,000 lbs CO2 -$4,355 </option>
+
+<option value="872000-lbs-CO2">872,000 lbs CO2 -$4,360 </option>
+<option value="873000-lbs-CO2">873,000 lbs CO2 -$4,365 </option>
+<option value="874000-lbs-CO2">874,000 lbs CO2 -$4,370 </option>
+<option value="875000-lbs-CO2">875,000 lbs CO2 -$4,375 </option>
+<option value="876000-lbs-CO2">876,000 lbs CO2 -$4,380 </option>
+<option value="877000-lbs-CO2">877,000 lbs CO2 -$4,385 </option>
+<option value="878000-lbs-CO2">878,000 lbs CO2 -$4,390 </option>
+<option value="879000-lbs-CO2">879,000 lbs CO2 -$4,395 </option>
+<option value="880000-lbs-CO2">880,000 lbs CO2 -$4,400 </option>
+
+<option value="881000-lbs-CO2">881,000 lbs CO2 -$4,405 </option>
+<option value="882000-lbs-CO2">882,000 lbs CO2 -$4,410 </option>
+<option value="883000-lbs-CO2">883,000 lbs CO2 -$4,415 </option>
+<option value="884000-lbs-CO2">884,000 lbs CO2 -$4,420 </option>
+<option value="885000-lbs-CO2">885,000 lbs CO2 -$4,425 </option>
+<option value="886000-lbs-CO2">886,000 lbs CO2 -$4,430 </option>
+<option value="887000-lbs-CO2">887,000 lbs CO2 -$4,435 </option>
+<option value="888000-lbs-CO2">888,000 lbs CO2 -$4,440 </option>
+<option value="889000-lbs-CO2">889,000 lbs CO2 -$4,445 </option>
+
+<option value="890000-lbs-CO2">890,000 lbs CO2 -$4,450 </option>
+<option value="891000-lbs-CO2">891,000 lbs CO2 -$4,455 </option>
+<option value="892000-lbs-CO2">892,000 lbs CO2 -$4,460 </option>
+<option value="893000-lbs-CO2">893,000 lbs CO2 -$4,465 </option>
+<option value="894000-lbs-CO2">894,000 lbs CO2 -$4,470 </option>
+<option value="895000-lbs-CO2">895,000 lbs CO2 -$4,475 </option>
+<option value="896000-lbs-CO2">896,000 lbs CO2 -$4,480 </option>
+<option value="897000-lbs-CO2">897,000 lbs CO2 -$4,485 </option>
+<option value="898000-lbs-CO2">898,000 lbs CO2 -$4,490 </option>
+
+<option value="899000-lbs-CO2">899,000 lbs CO2 -$4,495 </option>
+<option value="900000-lbs-CO2">900,000 lbs CO2 -$4,500 </option>
+<option value="901000-lbs-CO2">901,000 lbs CO2 -$4,505 </option>
+<option value="902000-lbs-CO2">902,000 lbs CO2 -$4,510 </option>
+<option value="903000-lbs-CO2">903,000 lbs CO2 -$4,515 </option>
+<option value="904000-lbs-CO2">904,000 lbs CO2 -$4,520 </option>
+<option value="905000-lbs-CO2">905,000 lbs CO2 -$4,525 </option>
+<option value="906000-lbs-CO2">906,000 lbs CO2 -$4,530 </option>
+<option value="907000-lbs-CO2">907,000 lbs CO2 -$4,535 </option>
+
+<option value="908000-lbs-CO2">908,000 lbs CO2 -$4,540 </option>
+<option value="909000-lbs-CO2">909,000 lbs CO2 -$4,545 </option>
+<option value="910000-lbs-CO2">910,000 lbs CO2 -$4,550 </option>
+<option value="911000-lbs-CO2">911,000 lbs CO2 -$4,555 </option>
+<option value="912000-lbs-CO2">912,000 lbs CO2 -$4,560 </option>
+<option value="913000-lbs-CO2">913,000 lbs CO2 -$4,565 </option>
+<option value="914000-lbs-CO2">914,000 lbs CO2 -$4,570 </option>
+<option value="915000-lbs-CO2">915,000 lbs CO2 -$4,575 </option>
+<option value="916000-lbs-CO2">916,000 lbs CO2 -$4,580 </option>
+
+<option value="917000-lbs-CO2">917,000 lbs CO2 -$4,585 </option>
+<option value="918000-lbs-CO2">918,000 lbs CO2 -$4,590 </option>
+<option value="919000-lbs-CO2">919,000 lbs CO2 -$4,595 </option>
+<option value="920000-lbs-CO2">920,000 lbs CO2 -$4,600 </option>
+<option value="921000-lbs-CO2">921,000 lbs CO2 -$4,605 </option>
+<option value="922000-lbs-CO2">922,000 lbs CO2 -$4,610 </option>
+<option value="923000-lbs-CO2">923,000 lbs CO2 -$4,615 </option>
+<option value="924000-lbs-CO2">924,000 lbs CO2 -$4,620 </option>
+<option value="925000-lbs-CO2">925,000 lbs CO2 -$4,625 </option>
+
+<option value="926000-lbs-CO2">926,000 lbs CO2 -$4,630 </option>
+<option value="927000-lbs-CO2">927,000 lbs CO2 -$4,635 </option>
+<option value="928000-lbs-CO2">928,000 lbs CO2 -$4,640 </option>
+<option value="929000-lbs-CO2">929,000 lbs CO2 -$4,645 </option>
+<option value="930000-lbs-CO2">930,000 lbs CO2 -$4,650 </option>
+<option value="931000-lbs-CO2">931,000 lbs CO2 -$4,655 </option>
+<option value="932000-lbs-CO2">932,000 lbs CO2 -$4,660 </option>
+<option value="933000-lbs-CO2">933,000 lbs CO2 -$4,665 </option>
+<option value="934000-lbs-CO2">934,000 lbs CO2 -$4,670 </option>
+
+<option value="935000-lbs-CO2">935,000 lbs CO2 -$4,675 </option>
+<option value="936000-lbs-CO2">936,000 lbs CO2 -$4,680 </option>
+<option value="937000-lbs-CO2">937,000 lbs CO2 -$4,685 </option>
+<option value="938000-lbs-CO2">938,000 lbs CO2 -$4,690 </option>
+<option value="939000-lbs-CO2">939,000 lbs CO2 -$4,695 </option>
+<option value="940000-lbs-CO2">940,000 lbs CO2 -$4,700 </option>
+<option value="941000-lbs-CO2">941,000 lbs CO2 -$4,705 </option>
+<option value="942000-lbs-CO2">942,000 lbs CO2 -$4,710 </option>
+<option value="943000-lbs-CO2">943,000 lbs CO2 -$4,715 </option>
+
+<option value="944000-lbs-CO2">944,000 lbs CO2 -$4,720 </option>
+<option value="945000-lbs-CO2">945,000 lbs CO2 -$4,725 </option>
+<option value="946000-lbs-CO2">946,000 lbs CO2 -$4,730 </option>
+<option value="947000-lbs-CO2">947,000 lbs CO2 -$4,735 </option>
+<option value="948000-lbs-CO2">948,000 lbs CO2 -$4,740 </option>
+<option value="949000-lbs-CO2">949,000 lbs CO2 -$4,745 </option>
+<option value="950000-lbs-CO2">950,000 lbs CO2 -$4,750 </option>
+<option value="951000-lbs-CO2">951,000 lbs CO2 -$4,755 </option>
+<option value="952000-lbs-CO2">952,000 lbs CO2 -$4,760 </option>
+
+<option value="953000-lbs-CO2">953,000 lbs CO2 -$4,765 </option>
+<option value="954000-lbs-CO2">954,000 lbs CO2 -$4,770 </option>
+<option value="955000-lbs-CO2">955,000 lbs CO2 -$4,775 </option>
+<option value="956000-lbs-CO2">956,000 lbs CO2 -$4,780 </option>
+<option value="957000-lbs-CO2">957,000 lbs CO2 -$4,785 </option>
+<option value="958000-lbs-CO2">958,000 lbs CO2 -$4,790 </option>
+<option value="959000-lbs-CO2">959,000 lbs CO2 -$4,795 </option>
+<option value="960000-lbs-CO2">960,000 lbs CO2 -$4,800 </option>
+<option value="961000-lbs-CO2">961,000 lbs CO2 -$4,805 </option>
+
+<option value="962000-lbs-CO2">962,000 lbs CO2 -$4,810 </option>
+<option value="963000-lbs-CO2">963,000 lbs CO2 -$4,815 </option>
+<option value="964000-lbs-CO2">964,000 lbs CO2 -$4,820 </option>
+<option value="965000-lbs-CO2">965,000 lbs CO2 -$4,825 </option>
+<option value="966000-lbs-CO2">966,000 lbs CO2 -$4,830 </option>
+<option value="967000-lbs-CO2">967,000 lbs CO2 -$4,835 </option>
+<option value="968000-lbs-CO2">968,000 lbs CO2 -$4,840 </option>
+<option value="969000-lbs-CO2">969,000 lbs CO2 -$4,845 </option>
+<option value="970000-lbs-CO2">970,000 lbs CO2 -$4,850 </option>
+
+<option value="971000-lbs-CO2">971,000 lbs CO2 -$4,855 </option>
+<option value="972000-lbs-CO2">972,000 lbs CO2 -$4,860 </option>
+<option value="973000-lbs-CO2">973,000 lbs CO2 -$4,865 </option>
+<option value="974000-lbs-CO2">974,000 lbs CO2 -$4,870 </option>
+<option value="975000-lbs-CO2">975,000 lbs CO2 -$4,875 </option>
+<option value="976000-lbs-CO2">976,000 lbs CO2 -$4,880 </option>
+<option value="977000-lbs-CO2">977,000 lbs CO2 -$4,885 </option>
+<option value="978000-lbs-CO2">978,000 lbs CO2 -$4,890 </option>
+<option value="979000-lbs-CO2">979,000 lbs CO2 -$4,895 </option>
+
+<option value="980000-lbs-CO2">980,000 lbs CO2 -$4,900 </option>
+<option value="981000-lbs-CO2">981,000 lbs CO2 -$4,905 </option>
+<option value="982000-lbs-CO2">982,000 lbs CO2 -$4,910 </option>
+<option value="983000-lbs-CO2">983,000 lbs CO2 -$4,915 </option>
+<option value="984000-lbs-CO2">984,000 lbs CO2 -$4,920 </option>
+<option value="985000-lbs-CO2">985,000 lbs CO2 -$4,925 </option>
+<option value="986000-lbs-CO2">986,000 lbs CO2 -$4,930 </option>
+<option value="987000-lbs-CO2">987,000 lbs CO2 -$4,935 </option>
+<option value="988000-lbs-CO2">988,000 lbs CO2 -$4,940 </option>
+
+<option value="989000-lbs-CO2">989,000 lbs CO2 -$4,945 </option>
+<option value="990000-lbs-CO2">990,000 lbs CO2 -$4,950 </option>
+<option value="991000-lbs-CO2">991,000 lbs CO2 -$4,955 </option>
+<option value="992000-lbs-CO2">992,000 lbs CO2 -$4,960 </option>
+<option value="993000-lbs-CO2">993,000 lbs CO2 -$4,965 </option>
+<option value="994000-lbs-CO2">994,000 lbs CO2 -$4,970 </option>
+<option value="995000-lbs-CO2">995,000 lbs CO2 -$4,975 </option>
+<option value="996000-lbs-CO2">996,000 lbs CO2 -$4,980 </option>
+<option value="997000-lbs-CO2">997,000 lbs CO2 -$4,985 </option>
+
+<option value="998000-lbs-CO2">998,000 lbs CO2 -$4,990 </option>
+<option value="999000-lbs-CO2">999,000 lbs CO2 -$4,995 </option>
+<option value="1000000-lbs-CO2">1,000,000 lbs CO2 -$5,000</option>
+</select>
+</font>
+</td>
+</tr>
+</table>
+</tr>
+</table>
+
+
+<p> To combat climate change, an individuals carbon footprint should not exceed 4,000 lbs CO2/Year </p>
+<p>
+<div style="line-height:200%"><b>Offsetting all your emissions is equivalent to: </b></div>
+<div style="line-height:140%">Saving <span id="spanGalGasEql" style="color:#FF0000">____</span> gallons of gasoline. </div>
+<div style="line-height:140%">Saving <span id="spanBarOilEql" style="color:#FF0000">____</span> barrels of oil. </div>
+<div style="line-height:140%">Saving <span id="spanProCylEql" style="color:#FF0000">____</span> propane cylinders. </div>
+
+<div style="line-height:140%">Saving <span id="spanRailCoalEql" style="color:#FF0000">____</span> railcars' worth of coal. </div>
+<div style="line-height:140%">Growing <span id="spanTreeSeedEql" style="color:#FF0000">____</span> tree seedlings for 10 years in an urban area. </div>
+<div style="line-height:140%">Eliminating <span id="spanHomeElectEql" style="color:#FF0000">____</span> homes' electricity for a year. </div>
+<div style="line-height:140%">Eliminating <span id="spanHomeEnergyEql" style="color:#FF0000">____</span> homes' energy use for a year. </div>
+
+<div style="line-height:140%">Recycling <span id="spanWasteLandfilEql" style="color:#FF0000">____</span> tons of waste instead of landfilling. </div>
+<div style="line-height:140%">Annual carbon storage of <span id="spanAcresPineEql" style="color:#FF0000">____</span> acres of pine or fir forest.</div>
+<div style="line-height:140%">Preserving <span id="spanDeforestEql" style="color:#FF0000">____</span> acres from deforestation. </div>
+<div style="line-height:140%">Removing <span id="spanCarsRoadEql" style="color:#FF0000">____</span> cars from the road for a year.</div>
+
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+<!--
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+//-->
+</script>
+
+
+</body>
+</html>
